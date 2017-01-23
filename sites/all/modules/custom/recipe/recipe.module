@@ -1,0 +1,185 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jonaskortum
+ * Date: 02.01.17
+ * Time: 15:43
+ */
+
+function recipe_menu() {
+
+    $items['rezept_erstellen_allgemein'] = array(
+        'title' => 'Rezept erstellen',
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('recipe_add_general_information_form'),
+    );
+
+    $items['rezept_erstellen_zutaten/%/%'] = array(
+        'title' => 'Rezept erstellen',
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('recipe_add_ingredients_form'),
+    );
+
+    $items['rezept_erstellen_vorschau/%'] = array(
+        'title' => 'Publications',
+        'access callback' => true,
+        'page callback' => 'recipe_get_preview',
+        'file' => 'recipe_get_preview.inc',
+    );
+
+    return $items;
+}
+
+function recipe_add_general_information_form() {
+
+    $form['main'] = array(
+
+        '#type' => 'fieldset',
+        '#title' => t('Testbeschreibung'),
+        '#states' => array(
+            'visible' => array (
+                ':input[name="room_type"]' => array('value' => t('Problemraum')),
+            ),
+        ),
+    );
+
+    $form['main']['title'] = array(
+        '#type' => 'textfield',
+        '#require' => TRUE,
+        '#title' => t('Name des Rezepts:'),
+        '#default_value' => t('')
+    );
+
+    $form['main']['howto'] = array(
+        '#type' => 'textarea',
+        '#require' => TRUE,
+        '#title' => t('Zubereitung:'),
+    );
+
+    $form['main']['file'] = array(
+        '#type' => 'file',
+        '#name' => 'files[]',
+        '#title' => t('Upload some photos'),
+        '#attributes' => array('multiple' => 'multiple'),
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Weiter',
+        '#submit' => array('recipe_go_to_ingredients')
+    );
+
+    return $form;
+}
+
+function recipe_go_to_ingredients($form, &$form_state) {
+    $titel = $form_state['values']['title'];
+    $preparation = $form_state['values']['howto'];
+    $sql = "INSERT INTO {recipe} (title, preparation) VALUES ('".$titel . "','".$preparation . "')";
+    $myInsertID = db_query($sql, array(), array('return' => Database::RETURN_INSERT_ID));
+    drupal_set_message($myInsertID);
+    drupal_goto('/rezept_erstellen_zutaten/4/'.$myInsertID);
+}
+
+function recipe_go_back_to_general() {
+    drupal_goto('/rezept_erstellen_allgemein');
+}
+
+function recipe_add_ingredients_form() {
+
+    $array = recipe_get_units();
+
+    $form['options'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Testbeschreibung'),
+        '#attributes' => array('class' => array('container-inline')),
+    );
+
+    $num = recipe_get_number();
+
+    for ($i = 1; $i<=$num; $i++) {
+        $form['options']['operation' . $i] = array(
+            '#type' => 'textfield',
+            '#require' => TRUE,
+            '#size' => 4,
+            '#title' => t('Name des Rezepts:'),
+            '#title_display' => 'invisible',
+            '#default_value' => t('')
+        );
+
+        $form['options']['operation2' . $i] = array(
+            '#type' => 'select',
+            '#title' => t('Operation'),
+            '#title_display' => 'invisible',
+            '#options' => $array,
+            '#default_value' => 'approve',
+        );
+
+        $form['options']['operation3' . $i] = array(
+            '#type' => 'textfield',
+            '#require' => TRUE,
+            '#title' => t('Name des Rezepts:'),
+            '#title_display' => 'invisible',
+            '#default_value' => t('')
+        );
+
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Zurück',
+            '#submit' => array('recipe_go_back_to_general')
+        );
+
+        $form['more'] = array(
+            '#type' => 'submit',
+            '#value' => 'Zutaten hinzufügen',
+            '#submit' => array('recipe_add_more_ingredients')
+        );
+
+        $form['back'] = array(
+            '#type' => 'submit',
+            '#value' => 'Weiter',
+            '#submit' => array('recipe_get_ingredients')
+        );
+    }
+
+    return $form;
+}
+
+function recipe_get_ingredients($form, &$form_state) {
+    $num = arg(1);
+    $array = recipe_get_units();
+    $recipe_id = arg(2);
+    for ($i = 1; $i<=$num; $i++) {
+        $eins = $form_state['values']['operation' . $i];
+        $zwei = $array[$form_state['values']['operation2' . $i]];
+        $drei = $form_state['values']['operation3' . $i];
+        if(strlen($eins) > 0 && strlen($zwei) > 0 && strlen($drei) > 0) {
+            $sql = "INSERT INTO {recipe_ingredient} VALUES (".$recipe_id.",'".$drei."',".$eins.",'".$zwei."')";
+            db_query($sql);
+        }
+        drupal_goto('/rezept_erstellen_vorschau/'.$recipe_id);
+    }
+}
+
+function recipe_get_units() {
+    $array = array();
+    array_push($array, "Becher");
+    array_push($array, "Beutel");
+    array_push($array, "Blatt");
+
+    return $array;
+}
+
+function recipe_get_number() {
+    $num = arg(1);
+    return $num;
+}
+
+function recipe_add_more_ingredients() {
+    $num = arg(1);
+    $num = $num + 2;
+    drupal_goto('/rezept_erstellen_zutaten/'.$num);
+}
+
