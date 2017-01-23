@@ -42,40 +42,47 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recipe.module" pinned="false" current-in-tab="false">
+      <file leaf-file-name="recipe.module" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/custom/recipe/recipe.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="63.217392">
-              <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+            <state vertical-scroll-proportion="-0.17751479">
+              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding>
                 <element signature="e#6#91#0#PHP" expanded="true" />
-                <marker date="1485195440000" expanded="true" signature="2054:2102" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="2054:2104" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="2054:2120" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="2054:2121" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="2054:2140" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="2054:2141" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="4555:4595" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="4555:4610" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="4555:4622" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="4555:4631" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="4555:4634" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="4555:4641" placeholder="INSERT INTO " />
-                <marker date="1485195440000" expanded="true" signature="4555:4644" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="2521:2569" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="2521:2571" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="2521:2587" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="2521:2588" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="2521:2607" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="2521:2608" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="3407:3441" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="3407:3457" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="3407:3459" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="3407:3474" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="3407:3475" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="5941:5981" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="5941:5996" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="5941:6008" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="5941:6017" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="5941:6020" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="5941:6027" placeholder="INSERT INTO " />
+                <marker date="1485207403000" expanded="true" signature="5941:6030" placeholder="INSERT INTO " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recipe_get_preview.inc" pinned="false" current-in-tab="true">
+      <file leaf-file-name="recipe_get_preview.inc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/custom/recipe/recipe_get_preview.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46597633">
-              <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+            <state vertical-scroll-proportion="-22.869566">
+              <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
               <folding>
                 <element signature="e#6#91#0#PHP" expanded="true" />
-                <marker date="1485196203000" expanded="true" signature="162:289" placeholder="SELECT * FRO... " />
-                <marker date="1485196203000" expanded="true" signature="162:290" placeholder="SELECT * FRO... " />
+                <marker date="1485207136000" expanded="true" signature="226:353" placeholder="SELECT * FRO... " />
+                <marker date="1485207136000" expanded="true" signature="226:354" placeholder="SELECT * FRO... " />
+                <marker date="1485207136000" expanded="true" signature="780:825" placeholder="SELECT * FRO... " />
+                <marker date="1485207136000" expanded="true" signature="780:826" placeholder="SELECT * FRO... " />
               </folding>
             </state>
           </provider>
@@ -92,8 +99,8 @@
         <option value="$PROJECT_DIR$/custom/send_newsletter/send_newsletter.module" />
         <option value="$PROJECT_DIR$/custom/text_boxes/text_boxes.module" />
         <option value="$PROJECT_DIR$/custom/text_boxes/text_boxes.info" />
-        <option value="$PROJECT_DIR$/custom/recipe/recipe.module" />
         <option value="$PROJECT_DIR$/custom/recipe/recipe_get_preview.inc" />
+        <option value="$PROJECT_DIR$/custom/recipe/recipe.module" />
       </list>
     </option>
   </component>
@@ -306,37 +313,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe/recipe.module">
+    <entry file="file://$PROJECT_DIR$/custom/recipe/recipe_get_preview.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="63.217392">
-          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+        <state vertical-scroll-proportion="-22.869566">
+          <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
           <folding>
             <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1485195440000" expanded="true" signature="2054:2102" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="2054:2104" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="2054:2120" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="2054:2121" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="2054:2140" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="2054:2141" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="4555:4595" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="4555:4610" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="4555:4622" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="4555:4631" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="4555:4634" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="4555:4641" placeholder="INSERT INTO " />
-            <marker date="1485195440000" expanded="true" signature="4555:4644" placeholder="INSERT INTO " />
+            <marker date="1485207136000" expanded="true" signature="226:353" placeholder="SELECT * FRO... " />
+            <marker date="1485207136000" expanded="true" signature="226:354" placeholder="SELECT * FRO... " />
+            <marker date="1485207136000" expanded="true" signature="780:825" placeholder="SELECT * FRO... " />
+            <marker date="1485207136000" expanded="true" signature="780:826" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe/recipe_get_preview.inc">
+    <entry file="file://$PROJECT_DIR$/custom/recipe/recipe.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46597633">
-          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+        <state vertical-scroll-proportion="-0.17751479">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding>
             <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1485196203000" expanded="true" signature="162:289" placeholder="SELECT * FRO... " />
-            <marker date="1485196203000" expanded="true" signature="162:290" placeholder="SELECT * FRO... " />
+            <marker date="1485207403000" expanded="true" signature="2521:2569" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="2521:2571" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="2521:2587" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="2521:2588" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="2521:2607" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="2521:2608" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="3407:3441" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="3407:3457" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="3407:3459" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="3407:3474" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="3407:3475" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="5941:5981" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="5941:5996" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="5941:6008" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="5941:6017" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="5941:6020" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="5941:6027" placeholder="INSERT INTO " />
+            <marker date="1485207403000" expanded="true" signature="5941:6030" placeholder="INSERT INTO " />
           </folding>
         </state>
       </provider>

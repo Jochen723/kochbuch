@@ -58,6 +58,21 @@ function recipe_add_general_information_form() {
         '#title' => t('Zubereitung:'),
     );
 
+    $form['main']['time'] = array(
+        '#type' => 'textfield',
+        '#require' => TRUE,
+        '#title' => t('Arbeitszeit'),
+        '#size' => 6,
+        '#default_value' => t('')
+    );
+
+    $form["main"]["difficulty"] = array(
+        "#type" => "select",
+        "#title" => t("Bitte passende Methode aussuchen"),
+        "#options" => array("leicht" => "leicht", "mittel" => "mittel", "schwer" => "schwer"),
+        "#default_value" => "leicht",
+    );
+
     $form['main']['file'] = array(
         '#type' => 'file',
         '#name' => 'files[]',
@@ -80,6 +95,32 @@ function recipe_go_to_ingredients($form, &$form_state) {
     $sql = "INSERT INTO {recipe} (title, preparation) VALUES ('".$titel . "','".$preparation . "')";
     $myInsertID = db_query($sql, array(), array('return' => Database::RETURN_INSERT_ID));
     drupal_set_message($myInsertID);
+
+    $num_files = count($_FILES['files']['name']);
+    $main_path = "";
+
+    for ($i = 0; $i < $num_files; $i++) {
+        $file = file_save_upload($i, array(
+            'file_validate_is_audio' => array(),
+            'file_validate_extensions' => array('png pdf jpg jpeg mp3 mp4'),
+            'file_validate_size' => array(5 * 1024 * 1024),
+        ));
+        if ($file) {
+            if ($file = file_move($file, 'public://')) {
+                $file->status = FILE_STATUS_PERMANENT;
+                $sql = "UPDATE {file_managed} SET status = 1 WHERE fid > 0";
+                db_query($sql);
+                $path = substr($file->uri, 9);
+                $sql = "INSERT INTO {recipe_data} VALUES (".$myInsertID.",'".$file->uri."')";
+                $form_state['values']['file'][$i] = $file;
+                db_query($sql);
+            }
+        } else {
+            drupal_set_message("NOO");
+
+        }
+    }
+
     drupal_goto('/rezept_erstellen_zutaten/4/'.$myInsertID);
 }
 
