@@ -23,7 +23,6 @@ function recipe_menu() {
     );
 
     $items['rezept_erstellen_vorschau/%'] = array(
-        'title' => 'Publications',
         'access callback' => true,
         'page callback' => 'recipe_get_preview',
         'file' => 'recipe_get_preview.inc',
@@ -209,6 +208,17 @@ function recipe_get_units() {
     array_push($array, "Becher");
     array_push($array, "Beutel");
     array_push($array, "Blatt");
+    array_push($array, "Gramm");
+    array_push($array, "Blatt");
+    array_push($array, "Bund");
+    array_push($array, "Stück");
+    array_push($array, "EL");
+    array_push($array, "ml");
+    array_push($array, "Blatt");
+    array_push($array, "TL");
+
+
+
 
     return $array;
 }
