@@ -15,6 +15,14 @@ function recipe_menu() {
         'page arguments' => array('recipe_add_general_information_form'),
     );
 
+    $items['rezept_bearbeiten/%'] = array(
+        'title' => 'Rezept bearbeiten',
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('recipe_change_information_form'),
+        'file' => 'recipe_change_recipe.inc',
+    );
+
     $items['rezept_erstellen_zutaten/%/%'] = array(
         'title' => 'Rezept erstellen',
         'access callback' => true,
@@ -23,8 +31,10 @@ function recipe_menu() {
     );
 
     $items['rezept_erstellen_vorschau/%'] = array(
+        'title' => 'Rezept erstellen',
         'access callback' => true,
-        'page callback' => 'recipe_get_preview',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('recipe_get_preview_form'),
         'file' => 'recipe_get_preview.inc',
     );
 
@@ -36,24 +46,20 @@ function recipe_add_general_information_form() {
     $form['main'] = array(
 
         '#type' => 'fieldset',
-        '#title' => t('Testbeschreibung'),
-        '#states' => array(
-            'visible' => array (
-                ':input[name="room_type"]' => array('value' => t('Problemraum')),
-            ),
-        ),
+        '#title' => t('Informationen zum Rezept'),
     );
 
     $form['main']['title'] = array(
         '#type' => 'textfield',
         '#require' => TRUE,
         '#title' => t('Name des Rezepts:'),
+        '#required' => TRUE,
         '#default_value' => t('')
     );
 
     $form['main']['howto'] = array(
         '#type' => 'textarea',
-        '#require' => TRUE,
+        '#required' => TRUE,
         '#title' => t('Zubereitung:'),
     );
 
@@ -61,13 +67,16 @@ function recipe_add_general_information_form() {
         '#type' => 'textfield',
         '#require' => TRUE,
         '#title' => t('Arbeitszeit'),
-        '#size' => 6,
+        '#required' => TRUE,
+        '#size' => 3,
+        '#field_suffix' => 'Minuten',
         '#default_value' => t('')
     );
 
     $form["main"]["difficulty"] = array(
         "#type" => "select",
-        "#title" => t("Bitte passende Methode aussuchen"),
+        "#title" => t("Schwierigkeitsgrad"),
+        '#required' => TRUE,
         "#options" => array("leicht" => "leicht", "mittel" => "mittel", "schwer" => "schwer"),
         "#default_value" => "leicht",
     );
@@ -75,9 +84,70 @@ function recipe_add_general_information_form() {
     $form['main']['file'] = array(
         '#type' => 'file',
         '#name' => 'files[]',
-        '#title' => t('Upload some photos'),
+        '#title' => t('Foto-Upload'),
         '#attributes' => array('multiple' => 'multiple'),
     );
+
+    $form['options'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Zutatenliste (max. 12)'),
+        '#attributes' => array('class' => array('container-inline')),
+    );
+    $array = recipe_get_units();
+
+    $form['options']['operation1'] = array(
+        '#type' => 'textfield',
+        '#required' => TRUE,
+        '#size' => 4,
+        '#title' => t('Zutatenanzahl:'),
+        '#title_display' => 'invisible',
+        '#default_value' => t('')
+    );
+
+    $form['options']['operation21'] = array(
+        '#type' => 'select',
+        '#title' => t('Operation'),
+        '#required' => TRUE,
+        '#title_display' => 'invisible',
+        '#options' => $array,
+        '#default_value' => 'approve',
+    );
+
+    $form['options']['operation31'] = array(
+        '#type' => 'textfield',
+        '#required' => TRUE,
+        '#title' => t('Name der Zutat'),
+        '#required' => TRUE,
+        '#title_display' => 'invisible',
+        '#default_value' => t('')
+    );
+
+    for ($i = 2; $i<=12; $i++) {
+        $form['options']['operation' . $i] = array(
+            '#type' => 'textfield',
+            '#require' => TRUE,
+            '#size' => 4,
+            '#title' => t('Name des Rezepts:'),
+            '#title_display' => 'invisible',
+            '#default_value' => t('')
+        );
+
+        $form['options']['operation2' . $i] = array(
+            '#type' => 'select',
+            '#title' => t('Operation'),
+            '#title_display' => 'invisible',
+            '#options' => $array,
+            '#default_value' => 'approve',
+        );
+
+        $form['options']['operation3' . $i] = array(
+            '#type' => 'textfield',
+            '#require' => TRUE,
+            '#title' => t('Name des Rezepts:'),
+            '#title_display' => 'invisible',
+            '#default_value' => t('')
+        );
+    }
 
     $form['submit'] = array(
         '#type' => 'submit',
@@ -91,7 +161,10 @@ function recipe_add_general_information_form() {
 function recipe_go_to_ingredients($form, &$form_state) {
     $titel = $form_state['values']['title'];
     $preparation = $form_state['values']['howto'];
-    $sql = "INSERT INTO {recipe} (title, preparation) VALUES ('".$titel . "','".$preparation . "')";
+    $work_time = $form_state['values']['time'];
+    $difficulty = $form_state['values']['difficulty'];
+    $sql = "INSERT INTO {recipe} (title, preparation, work_time, difficulty) VALUES ('".$titel . "','".$preparation . "',".$work_time.",'".$difficulty."')";
+    drupal_set_message($sql);
     $myInsertID = db_query($sql, array(), array('return' => Database::RETURN_INSERT_ID));
     drupal_set_message($myInsertID);
 
@@ -119,8 +192,19 @@ function recipe_go_to_ingredients($form, &$form_state) {
 
         }
     }
+    $array = recipe_get_units();
 
-    drupal_goto('/rezept_erstellen_zutaten/4/'.$myInsertID);
+    for ($i = 1; $i<=12; $i++) {
+        $eins = $form_state['values']['operation' . $i];
+        $zwei = $array[$form_state['values']['operation2' . $i]];
+        $drei = $form_state['values']['operation3' . $i];
+        if(strlen($eins) > 0 && strlen($zwei) > 0 && strlen($drei) > 0) {
+            $sql = "INSERT INTO {recipe_ingredient} VALUES (".$myInsertID.",'".$drei."',".$eins.",'".$zwei."')";
+            db_query($sql);
+        }
+    }
+
+    drupal_goto('/rezept_erstellen_vorschau/'.$myInsertID);
 }
 
 function recipe_go_back_to_general() {

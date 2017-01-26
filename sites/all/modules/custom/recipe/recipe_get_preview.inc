@@ -6,6 +6,38 @@
  * Time: 18:33
  */
 
+function recipe_get_preview_form() {
+
+    $test = recipe_get_preview();
+
+    $form['test']['form_item'] = array(
+        '#type' => 'markup',
+        '#title' => t('My Form Item'),
+        '#prefix' => $test
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Heute gekocht',
+        '#submit' => array('recipe_cooked_today')
+    );
+
+    $form['submit2'] = array(
+        '#type' => 'submit',
+        '#value' => 'Statistiken',
+        '#submit' => array('')
+    );
+
+    $form['submit3'] = array(
+        '#type' => 'submit',
+        '#value' => 'Bearbeiten',
+        '#submit' => array('recipe_change_button')
+    );
+
+    return $form;
+
+}
+
 function recipe_get_preview() {
 
     $path = "http://localhost/kochbuch/sites/default/files/";
@@ -16,14 +48,18 @@ function recipe_get_preview() {
     $zutatenArray = array();
     $test = "";
     $preparation = "";
+    $difficulty = "";
+    $work_time = "";
     foreach ($result as $r) {
         array_push($zutatenArray, $r);
         $preparation = $r->preparation;
     }
 
     $html = "<h1>".$zutatenArray[0]->title."</h1>";
+    $difficulty = $zutatenArray[0]->difficulty;
+    $work_time = $zutatenArray[0]->work_time;
     foreach ($zutatenArray as $zut) {
-        $test .= $zut->quantity . " " . $zut->measure . " " . $zut->ingredient . "<br>";
+        $test .= $zut->quantity . " " . $zut->measure . " <a href='/kochbuch/suche_nach_zutat/$zut->ingredient'>$zut->ingredient</a><br>";
     }
 
     $sql = "SELECT * FROM {recipe_data} WHERE recipe_id = ".$recipe_id;
@@ -96,15 +132,33 @@ function recipe_get_preview() {
 		<div style="clear:both"></div>
 	</div>
 </div>
+<div id="container">
+	<div id="links2">
+		<h3>Arbeitszeit: '.$work_time.' Minute(n)</h3>
+		<h3>Schwierigkeitsgrad: '.$difficulty.'</h3>
+		<section class="center">
+    </section>
+		<div style="clear:both"></div>
+	</div>
+</div>
 
-<h2>Arbeitszeit 30 Minuten</h2>
-<h2>Schwierigkeitsstufe: niedrig</h2>
 <h2>Notizen</h2>
-<h2>Button: Hab ich gekocht :-)</h2>
-<h2>Link zu Statistiken</h2>
-
 </body>
 </html>
 ';
     return $html;
+}
+
+function recipe_change_button() {
+    $recipe_id = arg(1);
+    drupal_goto('rezept_bearbeiten/'.$recipe_id);
+}
+
+function recipe_cooked_today() {
+    $recipe_id = arg(1);
+    $date = date("Y-m-d H:i:s");
+
+    $sql = "INSERT INTO {recipe_cooked} VALUES (".$recipe_id.",'".$date."')";
+    db_query($sql);
+    drupal_set_message("Rezept wurde heute gekocht");
 }
