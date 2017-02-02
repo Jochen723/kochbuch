@@ -1,0 +1,101 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jonaskortum
+ * Date: 02.01.17
+ * Time: 15:43
+ */
+
+function recipe_overview_menu() {
+
+    $items['rezeptuebersicht'] = array(
+        'title' => 'Rezeptübersicht',
+        'page callback' => 'recipe_overview_get_recipes',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+function recipe_overview_get_recipes() {
+    $array = recipe_overview_get_recipes2();
+    $test = recipe_overview_create_content($array);
+
+
+
+
+    return $test;
+}
+
+function recipe_overview_create_content($recipes) {
+    $test = "";
+    $name = "";
+    $path2 = "";
+    $test .= '
+<style>.img150
+{
+float: left;
+width: 150px;
+padding: 3px;
+font-size: 0.7em;
+} </style>
+';
+    $path = "http://localhost/kochbuch/sites/default/files/";
+
+    for($i = 0; $i<sizeof($recipes); $i++) {
+
+        $path2 = "";
+        $recipe_id = 16;
+        $sql = "SELECT * FROM {recipe_data} WHERE recipe_id = ".$recipes[$i];
+        $result2 = db_query($sql);
+
+        foreach ($result2 as $r2) {
+            $path2 = substr($r2->data_path, 9);
+        }
+
+        if(!strcmp($path2, "")) {
+            $path2 = "Beispielbild.jpeg";
+        }
+
+        $sql2 = "SELECT * FROM {recipe} WHERE recipe_id = ".$recipes[$i];
+        $nameResult = db_query($sql2);
+        foreach ($nameResult as $item) {
+            $name = $item->title;
+        }
+
+
+        $test .='
+<div class="img150">
+<img src="'.$path.$path2.'" width="150" height="150" border="0" alt="'.$path.'Beispielbild.jpeg">
+<a href="/kochbuch/rezeptansicht/'.$recipes[$i].'">'.$name.'</a>
+</div>
+';
+        if ($i+1%4 == 0 && $i>0) {
+            $test .= '<br style="clear: both;">
+
+ ';}
+
+
+    }
+
+
+
+    return $test;
+}
+
+function recipe_overview_get_recipes2() {
+
+    $recipes = array();
+
+    $sql = "SELECT recipe_id FROM {recipe}";
+    $result = db_query($sql);
+
+    foreach ($result as $r) {
+        array_push($recipes, $r->recipe_id);
+    }
+
+    return $recipes;
+}
+
+

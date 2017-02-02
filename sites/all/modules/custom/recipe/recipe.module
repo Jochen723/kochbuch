@@ -38,6 +38,14 @@ function recipe_menu() {
         'file' => 'recipe_get_preview.inc',
     );
 
+    $items['rezeptansicht/%'] = array(
+        'title' => 'Rezeptansicht',
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('recipe_get_overview_overview'),
+        'file' => 'recipe_get_overview.inc',
+    );
+
     return $items;
 }
 
@@ -116,13 +124,22 @@ function recipe_add_general_information_form() {
     $form['options']['operation31'] = array(
         '#type' => 'textfield',
         '#required' => TRUE,
+        '#size' => 40,
         '#title' => t('Name der Zutat'),
         '#required' => TRUE,
         '#title_display' => 'invisible',
         '#default_value' => t('')
     );
 
+    $test = "<br>";
+    $form['options']['form_item'] = array(
+        '#type' => 'markup',
+        '#title' => t('My Form Item'),
+        '#prefix' => $test
+    );
+
     for ($i = 2; $i<=12; $i++) {
+
         $form['options']['operation' . $i] = array(
             '#type' => 'textfield',
             '#require' => TRUE,
@@ -143,15 +160,23 @@ function recipe_add_general_information_form() {
         $form['options']['operation3' . $i] = array(
             '#type' => 'textfield',
             '#require' => TRUE,
+            '#size' => 40,
             '#title' => t('Name des Rezepts:'),
             '#title_display' => 'invisible',
             '#default_value' => t('')
+        );
+
+        $test = "<br>";
+        $form['options']['form_item2' . $i] = array(
+            '#type' => 'markup',
+            '#title' => t('My Form Item'),
+            '#prefix' => $test
         );
     }
 
     $form['submit'] = array(
         '#type' => 'submit',
-        '#value' => 'Weiter',
+        '#value' => 'Speichern',
         '#submit' => array('recipe_go_to_ingredients')
     );
 
@@ -204,7 +229,8 @@ function recipe_go_to_ingredients($form, &$form_state) {
         }
     }
 
-    drupal_goto('/rezept_erstellen_vorschau/'.$myInsertID);
+    drupal_goto('/rezeptansicht/'.$myInsertID);
+    drupal_set_message("Rezept erfolgreich gespeichert");
 }
 
 function recipe_go_back_to_general() {
@@ -228,7 +254,7 @@ function recipe_add_ingredients_form() {
             '#type' => 'textfield',
             '#require' => TRUE,
             '#size' => 4,
-            '#title' => t('Name des Rezepts:'),
+            '#title' => t('Name des BLAH:'),
             '#title_display' => 'invisible',
             '#default_value' => t('')
         );
@@ -292,17 +318,46 @@ function recipe_get_units() {
     array_push($array, "Becher");
     array_push($array, "Beutel");
     array_push($array, "Blatt");
-    array_push($array, "Gramm");
-    array_push($array, "Blatt");
     array_push($array, "Bund");
-    array_push($array, "Stück");
+    array_push($array, "cl");
+    array_push($array, "Dose(n)");
+    array_push($array, "einige");
     array_push($array, "EL");
+    array_push($array, "EL, gehäuft");
+    array_push($array, "EL, gestr.");
+    array_push($array, "etwas");
+    array_push($array, "evtl");
+    array_push($array, "Flasche");
+    array_push($array, "g");
+    array_push($array, "Glas");
+    array_push($array, "groß(e)");
+    array_push($array, "kg");
+    array_push($array, "klein(e)");
+    array_push($array, "Knolle");
+    array_push($array, "Kopf");
+    array_push($array, "Kugel");
+    array_push($array, "Liter");
+    array_push($array, "mg");
     array_push($array, "ml");
-    array_push($array, "Blatt");
+    array_push($array, "Pck");
+    array_push($array, "Prise");
+    array_push($array, "Riegel");
+    array_push($array, "Scheibe(n)");
+    array_push($array, "Schuss");
+    array_push($array, "Spritzer");
+    array_push($array, "Stange(n)");
+    array_push($array, "Stiel(e)");
+    array_push($array, "Streifen");
+    array_push($array, "Stück(e)");
+    array_push($array, "Tafel(n)");
+    array_push($array, "Tasse(n)");
     array_push($array, "TL");
-
-
-
+    array_push($array, "TL, gehäuft");
+    array_push($array, "TL, gestr.");
+    array_push($array, "Tube(n)");
+    array_push($array, "wenig");
+    array_push($array, "Würfel");
+    array_push($array, "Zehe(n)");
 
     return $array;
 }

@@ -88,19 +88,51 @@ function recipe_change_information_form() {
         $form['options']['operation3' . $i] = array(
             '#type' => 'textfield',
             '#require' => TRUE,
+            '#size' => 40,
             '#title' => t('Name des Rezepts:'),
             '#title_display' => 'invisible',
             '#default_value' => t($inter[$i]['ingredient'])
+        );
+
+        $test = "<br>";
+        $form['options']['form_item2' . $i] = array(
+            '#type' => 'markup',
+            '#title' => t('My Form Item'),
+            '#prefix' => $test
         );
     }
 
     $form['submit'] = array(
         '#type' => 'submit',
-        '#value' => 'Weiter',
+        '#value' => 'Speichern',
         '#submit' => array('recipe_save_recipe_changes')
     );
 
+    $form['submit2'] = array(
+        '#type' => 'submit',
+        '#value' => 'Löschen',
+        '#submit' => array('recipe_delete_recipe_changes')
+    );
+
     return $form;
+}
+
+function recipe_delete_recipe_changes() {
+    $recipe_id = arg(1);
+    $sql = "DELETE FROM {recipe} WHERE recipe_id = ".$recipe_id;
+    db_query($sql);
+
+    $sql = "DELETE FROM {recipe_ingredient} WHERE recipe_id = ".$recipe_id;
+    db_query($sql);
+
+    $sql = "DELETE FROM {recipe_data} WHERE recipe_id = ".$recipe_id;
+    db_query($sql);
+
+    $sql = "DELETE FROM {recipe_cooked} WHERE recipe_id = ".$recipe_id;
+    db_query($sql);
+
+    drupal_goto("rezeptuebersicht");
+    drupal_set_message("Rezept wurde gelöscht");
 }
 
 function get_recipe_data() {
@@ -174,4 +206,33 @@ function recipe_save_recipe_changes($form, &$form_state) {
             db_query($sql);
         }
     }
+
+    $num_files = count($_FILES['files']['name']);
+
+    for ($i = 0; $i < $num_files; $i++) {
+        $file = file_save_upload($i, array(
+            'file_validate_is_audio' => array(),
+            'file_validate_extensions' => array('png pdf jpg jpeg mp3 mp4'),
+            'file_validate_size' => array(5 * 1024 * 1024),
+        ));
+        if ($file) {
+            if ($file = file_move($file, 'public://')) {
+                $file->status = FILE_STATUS_PERMANENT;
+                $sql = "UPDATE {file_managed} SET status = 1 WHERE fid > 0";
+                db_query($sql);
+                $path = substr($file->uri, 9);
+                $sql = "DELETE FROM {recipe_data} WHERE recipe_id = ".$recipe_id;
+                db_query($sql);
+
+                $sql = "INSERT INTO {recipe_data} VALUES (".$recipe_id.",'".$file->uri."')";
+                $form_state['values']['file'][$i] = $file;
+                db_query($sql);
+            }
+        } else {
+            drupal_set_message("NOO");
+
+        }
+    }
+
+    drupal_goto("rezeptuebersicht");
 }

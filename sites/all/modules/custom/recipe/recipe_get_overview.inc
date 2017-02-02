@@ -2,13 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: jonaskortum
- * Date: 23.01.17
- * Time: 18:33
+ * Date: 02.02.17
+ * Time: 18:23
  */
 
-function recipe_get_preview_form() {
+function recipe_get_overview_overview() {
 
-    $test = recipe_get_preview();
+    $test = recipe_get_overview_get_recipe();
 
     $form['test']['form_item'] = array(
         '#type' => 'markup',
@@ -16,31 +16,38 @@ function recipe_get_preview_form() {
         '#prefix' => $test
     );
 
-    /*
+    $form['test']['note'] = array(
+        '#type' => 'textarea',
+        '#required' => TRUE,
+        '#default_value' => recipe_get_overview_get_notes(),
+    );
+
+    $form['blablallv'] = array(
+        '#type' => 'submit',
+        '#value' => 'Noitzen speichern',
+        '#submit' => array('recipe_get_overview_save_note')
+    );
+
     $form['submit'] = array(
         '#type' => 'submit',
-        '#value' => 'Heute gekocht',
-        '#submit' => array('recipe_cooked_today')
+        '#value' => 'Zurück zur Übersicht',
+        '#submit' => array('recipe_get_overview_back_to_overview')
     );
 
     $form['submit2'] = array(
         '#type' => 'submit',
-        '#value' => 'Statistiken',
-        '#submit' => array('')
-    );*/
-
-    $form['submit3'] = array(
-        '#type' => 'submit',
         '#value' => 'Bearbeiten',
-        '#submit' => array('recipe_change_button')
+        '#submit' => array('recipe_get_overview_change_recipe')
     );
 
     return $form;
-
 }
 
-function recipe_get_preview() {
+function recipe_get_overview_back_to_overview() {
+    drupal_goto("rezeptuebersicht");
+}
 
+function recipe_get_overview_get_recipe() {
     $path = "http://localhost/kochbuch/sites/default/files/";
 
     $recipe_id = arg(1);
@@ -77,11 +84,6 @@ function recipe_get_preview() {
     $html .= "<br><br>";
     $html .= "<h2>Zubereitung</h2>";
     $html .= $preparation;
-
-    drupal_set_message($path);
-    drupal_set_message($path2);
-
-
 
     $html = '<html>
 <!DOCTYPE html>
@@ -154,16 +156,27 @@ function recipe_get_preview() {
     return $html;
 }
 
-function recipe_change_button() {
+function recipe_get_overview_change_recipe() {
     $recipe_id = arg(1);
-    drupal_goto('rezept_bearbeiten/'.$recipe_id);
+    drupal_goto("rezept_bearbeiten/".$recipe_id);
 }
 
-function recipe_cooked_today() {
+function recipe_get_overview_get_notes() {
     $recipe_id = arg(1);
-    $date = date("Y-m-d H:i:s");
+    $note = "";
+    $sql = "SELECT * FROM {recipe} WHERE {recipe_id} = ".$recipe_id;
+    $result = db_query($sql);
+    foreach ($result as $item) {
+        $note = $item->note;
+    }
 
-    $sql = "INSERT INTO {recipe_cooked} VALUES (".$recipe_id.",'".$date."')";
+    return $note;
+}
+
+function recipe_get_overview_save_note($form, &$form_state) {
+    $recipe_id = arg(1);
+    $note = $form_state['values']['note'];
+
+    $sql = "UPDATE {recipe} SET note = '".$note."' WHERE recipe_id = ".$recipe_id;
     db_query($sql);
-    drupal_set_message("Rezept wurde heute gekocht");
 }
