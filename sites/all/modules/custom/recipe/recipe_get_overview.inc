@@ -70,6 +70,8 @@ function recipe_get_overview_get_recipe() {
         $test .= $zut->quantity . " " . $zut->measure . " <a href='/kochbuch/suche_nach_zutat/$zut->ingredient'>$zut->ingredient</a><br>";
     }
 
+    $test .= "<br><a href=''>Weniger</a> 1 <a href=''>Mehr</a>";
+
     $sql = "SELECT * FROM {recipe_data} WHERE recipe_id = ".$recipe_id;
     $result2 = db_query($sql);
     $path2 = "Beispielbild.jpeg";
@@ -81,6 +83,7 @@ function recipe_get_overview_get_recipe() {
     $html .= "<br><br>";
     $html .= "<h2>Zutaten</h2>";
     $html .= $test;
+
     $html .= "<br><br>";
     $html .= "<h2>Zubereitung</h2>";
     $html .= $preparation;
