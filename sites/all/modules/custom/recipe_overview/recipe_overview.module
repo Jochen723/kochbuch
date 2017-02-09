@@ -68,7 +68,7 @@ font-size: 0.7em;
         $test .='
 <div class="img150">
 <img src="'.$path.$path2.'" width="150" height="150" border="0" alt="'.$path.'Beispielbild.jpeg">
-<a href="/kochbuch/rezeptansicht/'.$recipes[$i].'">'.$name.'</a>
+<a href="/kochbuch/rezeptansicht/'.$recipes[$i].'/4">'.$name.'</a>
 </div>
 ';
         if ($i+1%4 == 0 && $i>0) {

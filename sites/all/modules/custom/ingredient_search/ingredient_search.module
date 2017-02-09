@@ -41,6 +41,7 @@ function ingredient_search_get_recipe_with_ingredient() {
     $recipes = array();
 
     $sql = "SELECT DISTINCT recipe_id FROM {recipe_ingredient} WHERE ingredient LIKE '%".$ingredient."%' ORDER BY recipe_id ASC";
+    drupal_set_message($sql);
     $result = db_query($sql);
 
     foreach ($result as $r) {
@@ -66,7 +67,6 @@ font-size: 0.7em;
     $path = "http://localhost/kochbuch/sites/default/files/";
 
     for($i = 0; $i<sizeof($recipes); $i++) {
-        drupal_set_message($recipes[$i]);
     $recipe_id = 16;
     $sql = "SELECT * FROM {recipe_data} WHERE recipe_id = ".$recipes[$i];
     $result2 = db_query($sql);

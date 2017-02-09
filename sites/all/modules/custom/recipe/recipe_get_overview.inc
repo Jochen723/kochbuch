@@ -18,7 +18,6 @@ function recipe_get_overview_overview() {
 
     $form['test']['note'] = array(
         '#type' => 'textarea',
-        '#required' => TRUE,
         '#default_value' => recipe_get_overview_get_notes(),
     );
 
@@ -58,19 +57,31 @@ function recipe_get_overview_get_recipe() {
     $preparation = "";
     $difficulty = "";
     $work_time = "";
+    $number = "";
     foreach ($result as $r) {
         array_push($zutatenArray, $r);
         $preparation = $r->preparation;
+        $number = $r->number_of_persons;
     }
 
     $html = "<h1>".$zutatenArray[0]->title."</h1>";
     $difficulty = $zutatenArray[0]->difficulty;
     $work_time = $zutatenArray[0]->work_time;
+    $zutatenArray = recipe_change_number_of_persons($zutatenArray, $number);
     foreach ($zutatenArray as $zut) {
         $test .= $zut->quantity . " " . $zut->measure . " <a href='/kochbuch/suche_nach_zutat/$zut->ingredient'>$zut->ingredient</a><br>";
     }
 
-    $test .= "<br><a href=''>Weniger</a> 1 <a href=''>Mehr</a>";
+    global $base_url;
+
+    $minus = arg(2)-1;
+    if($minus <0) {
+        $minus = 0;
+    }
+    $plus = arg(2)+1;
+
+
+    $test .= "<br><a href='".$base_url."/rezeptansicht/".arg(1)."/".$minus."'>Weniger</a> ".arg(2)." Personen <a href='".$base_url."/rezeptansicht/".arg(1)."/".$plus."'>Mehr</a>";
 
     $sql = "SELECT * FROM {recipe_data} WHERE recipe_id = ".$recipe_id;
     $result2 = db_query($sql);
@@ -80,6 +91,7 @@ function recipe_get_overview_get_recipe() {
         $path2 = substr($r2->data_path, 9);
         $html .=  '<img src="'.$path.$path2.'" alt="Smiley face" height="300" width="300">';
     }
+
     $html .= "<br><br>";
     $html .= "<h2>Zutaten</h2>";
     $html .= $test;
@@ -182,4 +194,16 @@ function recipe_get_overview_save_note($form, &$form_state) {
 
     $sql = "UPDATE {recipe} SET note = '".$note."' WHERE recipe_id = ".$recipe_id;
     db_query($sql);
+}
+
+function recipe_change_number_of_persons($array, $number) {
+    $anzahl = arg(2);
+    $num = $number;
+    $a = $array;
+
+    foreach ($a as $r) {
+        $r->quantity = round($r->quantity/$num*$anzahl,2);
+    }
+
+    return $a;
 }
