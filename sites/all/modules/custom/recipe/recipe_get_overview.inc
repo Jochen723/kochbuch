@@ -47,7 +47,8 @@ function recipe_get_overview_back_to_overview() {
 }
 
 function recipe_get_overview_get_recipe() {
-    $path = "http://localhost/kochbuch/sites/default/files/";
+    global $base_url;
+    $path = $base_url."/sites/default/files/";
 
     $recipe_id = arg(1);
     $sql = "SELECT * FROM {recipe_ingredient} AS rec1 INNER JOIN {recipe} AS rec2 ON rec1.recipe_id = rec2.recipe_id WHERE rec1.recipe_id = ".$recipe_id;

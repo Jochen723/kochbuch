@@ -41,7 +41,9 @@ padding: 3px;
 font-size: 0.7em;
 } </style>
 ';
-    $path = "http://localhost/kochbuch/sites/default/files/";
+
+    global $base_url;
+    $path = $base_url."/sites/default/files/";
 
     for($i = 0; $i<sizeof($recipes); $i++) {
 
