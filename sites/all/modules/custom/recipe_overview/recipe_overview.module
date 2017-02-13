@@ -74,7 +74,7 @@ font-size: 0.7em;
 </div>
 ';
         if ($i+1%4 == 0 && $i>0) {
-            $test .= '<br style="clear: both;">
+           $test .= '<br style="clear: both;">
 
  ';}
 
@@ -98,6 +98,15 @@ function recipe_overview_get_recipes2() {
     }
 
     return $recipes;
+}
+
+function recipe_overview_node_view($node, $view_mode, $langcode) {
+    if(!strcmp($node->type, "rezept")) {
+        $reference = 30;
+        $quantity = 4;
+
+        drupal_goto("/rezeptansicht/".$reference."/".$quantity);
+    }
 }
 
 

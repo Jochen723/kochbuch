@@ -96,6 +96,13 @@ function recipe_add_general_information_form() {
         '#attributes' => array('multiple' => 'multiple'),
     );
 
+    $form['main']['rating'] = array(
+        '#type' => 'fivestar',
+        '#stars' => 5,
+        '#default_value' => 20,
+        '#title' => t('Bewertung des Rezepts'),
+    );
+
     $form['options'] = array(
         '#type' => 'fieldset',
         '#title' => t('Zutatenliste (max. 12)'),
@@ -131,12 +138,16 @@ function recipe_add_general_information_form() {
         '#default_value' => t('')
     );
 
+
+
     $test = "<br>";
     $form['options']['form_item'] = array(
         '#type' => 'markup',
         '#title' => t('My Form Item'),
         '#prefix' => $test
     );
+
+
 
     for ($i = 2; $i<=12; $i++) {
 
@@ -192,17 +203,17 @@ function recipe_add_general_information_form() {
 }
 
 function recipe_go_to_ingredients($form, &$form_state) {
+    global $user;
+    $user_id = $user->uid;
     $titel = $form_state['values']['title'];
     $preparation = $form_state['values']['howto'];
     $work_time = $form_state['values']['time'];
     $difficulty = $form_state['values']['difficulty'];
+    $rating = $form_state['values']['rating'];
     $number_of_persons = $form_state['values']['number_of_persons'];
-    $sql = "INSERT INTO {recipe} (title, preparation, work_time, difficulty, number_of_persons) VALUES ('".$titel . "','".$preparation . "',".$work_time.",'".$difficulty."',".$number_of_persons . ")";
+    $sql = "INSERT INTO {recipe} (title, preparation, work_time, difficulty, number_of_persons, uid, rating) VALUES ('".$titel . "','".$preparation . "',".$work_time.",'".$difficulty."',".$number_of_persons . ",".$user_id.", ".$rating.")";
     drupal_set_message($sql);
     $myInsertID = db_query($sql, array(), array('return' => Database::RETURN_INSERT_ID));
-
-
-
 
     $num_files = count($_FILES['files']['name']);
     $main_path = "";

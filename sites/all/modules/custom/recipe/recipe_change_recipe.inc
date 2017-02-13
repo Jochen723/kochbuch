@@ -56,6 +56,13 @@ function recipe_change_information_form() {
         '#attributes' => array('multiple' => 'multiple'),
     );
 
+    $form['main']['rating'] = array(
+        '#type' => 'fivestar',
+        '#stars' => 5,
+        '#default_value' => $array->rating,
+        '#title' => t('Bewertung des Rezepts'),
+    );
+
     $form['options'] = array(
         '#type' => 'fieldset',
         '#title' => t('Zutatenliste (max. 12)'),

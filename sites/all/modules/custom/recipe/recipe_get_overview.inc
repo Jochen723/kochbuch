@@ -39,6 +39,12 @@ function recipe_get_overview_overview() {
         '#submit' => array('recipe_get_overview_change_recipe')
     );
 
+    $form['submit2'] = array(
+        '#type' => 'submit',
+        '#value' => 'Gekocht',
+        '#submit' => array('recipe_add_cooking_date')
+    );
+
     return $form;
 }
 
@@ -207,4 +213,40 @@ function recipe_change_number_of_persons($array, $number) {
     }
 
     return $a;
+}
+
+function recipe_add_cooking_date($form, &$form_state) {
+        $title = "";
+        $persons = 0;
+        $recipe_id = arg(1);
+        $sql = "SELECT * FROM {recipe} WHERE recipe_id = ".$recipe_id;
+        $result2 = db_query($sql);
+    foreach ($result2 as $item) {
+            $title = $item->title;
+        }
+
+        $node = new stdClass();
+        $node->type = 'rezept';
+        node_object_prepare($node);
+        $node->language = LANGUAGE_NONE;
+        $node->title = $title;
+        $node->body[$node->language][0]['value'] = "";
+
+        $date = new DateTime(date('Y-m-d H:i:s'));
+
+        $deadline2 = $date->format('Y-m-d H:i:s');
+
+        $deadline2 = str_replace(" ", "T", $deadline2);
+        $referenz = $recipe_id;
+
+        $node->field_cook_date[$node->language][0]['value'] = $deadline2;
+        $node->field_cook_date[$node->language][0]['timezone'] = "Europe/Berlin";
+        $node->field_cook_date[$node->language][0]['timezone_db'] = "Europe/Berlin";
+        $node->field_referenznummer[$node->language][0]['value'] = $referenz;
+        node_save($node);
+
+        global $user;
+
+        $sql = "INSERT INTO {recipe_cooked} (recipe_id, date, uid) VALUES (".$recipe_id.",'".$deadline2."',".$user->uid.")";
+        db_query($sql);
 }
