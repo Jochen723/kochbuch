@@ -1,0 +1,259 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jonaskortum
+ * Date: 21.02.17
+ * Time: 21:52
+ */
+
+function category_menu() {
+
+    $items['category'] = array(
+        'title' => 'Rezeptsuche',
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('category_form'),
+    );
+
+    $items['add_to_category/%'] = array(
+        'title' => 'Rezeptsuche',
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('category_add_form'),
+    );
+
+    $items['add_recipe_to_category/%/%'] = array(
+        'title' => 'Rezeptübersicht',
+        'page callback' => 'category_add_recipe_to_category',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['category_overview/%'] = array(
+        'title' => 'Rezeptübersicht',
+        'page callback' => 'category_category_overview',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+function category_category_overview() {
+    $category = arg(1);
+    global $base_url;
+    global $user;
+
+    $bla = '
+    <style>
+.city {
+ float: left;
+ margin: 5px;
+ max-width: 300px;
+ width: 180px;
+ height: 180px;
+ padding: 3px;
+ font-size: 0.7em;
+}
+
+.img {
+    width:  200px;
+    height: 150px;
+}
+</style>
+';
+
+    $sql = "SELECT * FROM {recipe_user_category} WHERE uid = ".$user->uid." AND category_id = ".$category;
+    $result = db_query($sql);
+
+    foreach ($result as $item) {
+        $path = "";
+        $name = "";
+        $sql = "SELECT * FROM {node} WHERE nid = ".$item->recipe_id;
+        $result = db_query($sql);
+        foreach ($result as $item2) {
+            $name = $item2->title;
+        }
+        $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$item->recipe_id;
+        $result = db_query($sql);
+        foreach ($result as $item3) {
+            $sql2 = "SELECT * FROM {file_managed} WHERE fid = ".$item3->field_recipe_image_fid;
+            $result2 = db_query($sql2);
+            foreach ($result2 as $item4) {
+                $path2 = $item4->uri;
+                $path2 = substr($path2, 8);
+                $path2 = $base_url."/sites/default/files/".$path2;
+            }
+        }
+
+        $bla .= '
+
+ <tr><td>
+
+ <div class="city">
+ <a href="'.$base_url.'/node/'.$item->recipe_id.'"</a> <img class = "img "src="'.$path2.'" border="4" alt="Rose 1"><h3>'.$name.'</h3>
+ </div>
+
+ ';    }
+
+
+
+    $bla .= '</table>';
+
+
+
+
+
+
+
+return $bla;
+
+
+}
+
+function category_form() {
+
+    global $user;
+    global $base_url;
+
+    $array = array();
+    $temp = array();
+    $sql = "SELECT * FROM {user_category} AS u INNER JOIN {recipe_category} as r ON u.category_id = r.category_id WHERE u.uid = ".$user->uid;
+    $result = db_query($sql);
+
+    $sql = "SELECT * FROM {recipe_user_category} WHERE uid = ".$user->uid;
+    $result2 = db_query($sql);
+    foreach ($result2 as $item) {
+       array_push($array, $item->category_id);
+    }
+
+    $temp = array_count_values($array);
+
+    $tempString = "<table><th>Nr.</th><th>Name</th> <th>Anzahl Rezepte</th>";
+    foreach ($result as $item) {
+        if(array_key_exists ($item->category_id , $temp)) {
+        } else {
+            $temp[$item->category_id] = 0;
+        }
+        $tempString = $tempString . '<tr><td>1</td><td>'.$item->category.'</td><td><a href="'.$base_url.'/category_overview/'.$item->category_id.'/">'.$temp[$item->category_id].'</td></tr>';
+
+    }
+
+
+
+    $tempString .= "</table>";
+
+    $form['test']['form_item'] = array(
+        '#type' => 'markup',
+        '#title' => t('My Form Item'),
+        '#prefix' => $tempString,
+    );
+
+    $form['test2']['category'] = array(
+        '#type' => 'textfield',
+        '#require' => TRUE,
+        '#title' => t('Neue Kategorie anlegen'),
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'neue Kategorie speichern',
+        '#submit' => array('category_save_new_category')
+    );
+        return $form;
+}
+
+function category_add_form() {
+    $array = array();
+    $temp = array();
+    global $base_url;
+    global $user;
+    $node = arg(1);
+
+    $sql = "SELECT * FROM {user_category} AS u INNER JOIN {recipe_category} as r ON u.category_id = r.category_id WHERE u.uid = ".$user->uid;
+    $result = db_query($sql);
+
+    $sql = "SELECT * FROM {recipe_user_category} WHERE uid = ".$user->uid;
+    $result2 = db_query($sql);
+    foreach ($result2 as $item) {
+        array_push($array, $item->category_id);
+    }
+
+    $temp = array_count_values($array);
+
+    $tempString = "<table><th>Nr.</th><th>Name</th><th>Anzahl Rezepte</th><th>Aktion</th>";
+    foreach ($result as $item) {
+
+        if(array_key_exists ($item->category_id , $temp)) {
+        } else {
+            $temp[$item->category_id] = 0;
+        }
+
+        $tempString = $tempString . '<tr><td>1</td><td>'.$item->category.'</td><td>'.$temp[$item->category_id].'</td><td><a href="'.$base_url.'/add_recipe_to_category/'.$item->category_id.'/'.$node.'">Rezept hinzufügen</a></td></tr>';
+
+    }
+
+
+
+    $tempString .= "</table>";
+
+    $form['test']['form_item'] = array(
+        '#type' => 'markup',
+        '#title' => t('My Form Item'),
+        '#prefix' => $tempString,
+    );
+    
+    return $form;
+
+}
+
+function category_save_new_category($form, &$form_state) {
+    global $user;
+    $cat = $form_state['values']['category'];
+
+    $sql = "INSERT INTO {recipe_category} (category) VALUES ('".$cat."')";
+    db_query($sql);
+
+
+    $id = db_insert('recipe_category')
+        ->fields(array(
+            'category' => $cat,
+        ))
+        ->execute();
+
+
+    $sql = "INSERT INTO {user_category} (uid, category_id) VALUES (".$user->uid.",".$id.")";
+    db_query($sql);
+
+
+    drupal_set_message("Kategorie erfolgreich angelegt");
+
+}
+
+function category_add_recipe_to_category() {
+    global $user;
+    $counter = 0;
+    $category = arg(1);
+    $recipe = arg(2);
+
+    $sql = "SELECT * FROM {recipe_user_category} WHERE recipe_id = ".$recipe." AND category_id = ".$category;
+    $result = db_query($sql);
+    foreach ($result as $item) {
+        $counter++;
+    }
+
+    if($counter == 0) {
+        $sql = "INSERT INTO {recipe_user_category} (recipe_id, uid, category_id) VALUES (".$recipe.",".$user->uid.",".$category.")";
+        db_query($sql);
+        drupal_set_message("Rezept wurde erfolgreich hinzugefügt!");
+    } else {
+        drupal_set_message("Rezept ist bereits in der Kategorie vorhanden!", "error");
+    }
+
+
+
+
+    drupal_goto("node/".$recipe);
+
+
+}

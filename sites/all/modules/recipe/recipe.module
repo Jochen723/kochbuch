@@ -169,7 +169,7 @@ function recipe_insert($node) {
   db_insert('recipe')
     ->fields(array(
       'nid' => $node->nid,
-      'source' => $node->recipe_source,
+      //'source' => $node->recipe_source,
       'yield' => $node->recipe_yield,
       'yield_unit' => $node->recipe_yield_unit,
       'description' => $node->recipe_description['value'],
@@ -330,10 +330,9 @@ function recipe_form($node, &$form_state) {
     '#cols' => 60,
     '#rows' => 1,
     '#description' => t('A short description or "teaser" for the recipe.'),
-    '#required' => TRUE,
   );
   $form['recipe_instructions'] = array(
-    '#title' => t('Instructions'),
+    '#title' => t('Durchführung'),
     '#type' => 'text_format',
     '#format' => isset($node->format) ? $node->format : NULL,
     '#default_value' => !empty($node->recipe_instructions) ? $node->recipe_instructions : '',
@@ -342,7 +341,7 @@ function recipe_form($node, &$form_state) {
     '#description' => t('Step by step instructions on how to prepare and cook the recipe.'),
   );
   $form['recipe_notes'] = array(
-    '#title' => t('Additional notes'),
+    '#title' => t('Zusätzliche Notizen'),
     '#type' => 'text_format',
     '#format' => isset($node->format) ? $node->format : NULL,
     '#default_value' => !empty($node->recipe_notes) ? $node->recipe_notes : '',
@@ -355,21 +354,21 @@ function recipe_form($node, &$form_state) {
 
   $form['recipe_yield'] = array(
     '#type' => 'textfield',
-    '#title' => t('Yield'),
+    '#title' => t('Anzahl Einheiten'),
     '#default_value' => !empty($node->recipe_yield) ? $node->recipe_yield : '',
     '#size' => 4,
     '#maxlength' => 4,
-    '#description' => t('The number of servings the recipe will make (whole number integer, ie 5 or 6).'),
+    '#description' => t('Die Anzahl der oben ausgewählten Einheiten. Beispielsweise 4, 5, ...'),
     '#required' => TRUE,
   );
 
   $form['recipe_yield_unit'] = array(
     '#type' => 'textfield',
-    '#title' => t('Yield Units'),
-    '#default_value' => empty($node->recipe_yield_unit) ? t('Servings') : $node->recipe_yield_unit,
+    '#title' => t('Einheit'),
+    '#default_value' => empty($node->recipe_yield_unit) ? t('Personen') : $node->recipe_yield_unit,
     '#size' => 16,
     '#maxlength' => 64,
-    '#description' => t('The units for the yield field(ie servings, people, cans, cookies, etc).'),
+    '#description' => t('Entsprechende Einheit. Beispielsweise Personen, Kekse, Gläser...'),
     '#required' => FALSE,
   );
 
@@ -425,7 +424,7 @@ function recipe_form($node, &$form_state) {
     // Strange, but html_entity_decode() doesn't handle &frasl;
     $form['recipe_ingredients']['ing'][$id]['quantity'] = array(
       '#type' => 'textfield',
-      '#title' => t('Quantity'),
+      '#title' => t('Anzahl'),
       '#default_value' => preg_replace('/\&frasl;/', '/', recipe_ingredient_quantity_from_decimal($ingredient['quantity'], TRUE)),
       '#size' => 8,
       '#maxlength' => 8,
@@ -433,7 +432,7 @@ function recipe_form($node, &$form_state) {
     );
     $form['recipe_ingredients']['ing'][$id]['unit_key'] = array(
       '#type' => 'select',
-      '#title' => t('Unit'),
+      '#title' => t('Einheit'),
       '#default_value' => $ingredient['unit_key'] != '' ? $ingredient['unit_key'] : variable_get('recipe_default_unit', ''),
       '#options' => recipe_unit_options(),
       '#attributes' => array('class' =>array('form-item-recipe-ingredients-unit-key')),
@@ -449,7 +448,7 @@ function recipe_form($node, &$form_state) {
     );
     $form['recipe_ingredients']['ing'][$id]['note'] = array(
       '#type' => 'textfield',
-      '#title' => t('Note'),
+      '#title' => t('Notiz'),
       '#default_value' => $ingredient['note'],
       '#size' => 40,
       '#maxlength' => 255,
@@ -479,6 +478,7 @@ function recipe_form($node, &$form_state) {
     ),
   );
 
+/*
   $form['recipe_source'] = array(
     '#type' => 'textfield',
     '#title' => t('Source'),
@@ -487,12 +487,13 @@ function recipe_form($node, &$form_state) {
     '#maxlength' => 127,
     '#description' => t('Optional. Does anyone else deserve credit for this recipe?'),
   );
+  */
 
   $form['recipe_preptime'] = array(
     '#type' => 'textfield',
     '#size' => 10,
     '#maxlength' => 10,
-    '#title' => t('Preparation time'),
+    '#title' => t('Vorbereitungszeit'),
     '#default_value' => !empty($node->recipe_preptime) ? $node->recipe_preptime : 0,
     '#description' => t('How long does this recipe take to prepare, in <strong>minutes</strong>.  Utilize 0 for N/A.'),
   );
@@ -501,7 +502,7 @@ function recipe_form($node, &$form_state) {
     '#type' => 'textfield',
     '#size' => 10,
     '#maxlength' => 10,
-    '#title' => t('Cooking time'),
+    '#title' => t('Koch-/Backzeit'),
     '#default_value' => !empty($node->recipe_cooktime) ? $node->recipe_cooktime : 0,
     '#description' => t('How long does this recipe take to cook, in <strong>minutes</strong>. Utilize 0 for N/A.'),
   );
@@ -519,7 +520,7 @@ function recipe_form($node, &$form_state) {
 function theme_ingredients_form($variables) {
   $form = $variables['form'];
 
-  $header = array('', t('Quantity'), t('Units'), t('Ingredient name'), t('Processing/Notes'), t('Sort Weight'));
+  $header = array('', t('Anzahl'), t('Einheit'), t('Name'), t('Notiz'), t('Sort Weight'));
   $rows = array();
   drupal_add_tabledrag('ingredient-list', 'order', 'sibling', 'ingredient-weight');
 
@@ -804,6 +805,21 @@ function recipe_view($node, $view_mode) {
       '#markup' => theme('recipe_instructions', array('node' => $node)),
   );
 
+  global $user;
+
+  $note = "Keine Notizen vorhanden";
+
+  $sql = "SELECT * FROM {recipe_notes} WHERE recipe_ID = ".$node->nid." AND uid = ".$user->uid;
+  $result = db_query($sql);
+
+  foreach ($result as $item) {
+    $note = $item->note;
+  }
+
+  $node->content['recipe_instructions2'] = array(
+      '#markup' => '<h1>Persönliche Notizen</h1><p>'.$note.'</p>',
+  );
+
   // Don't show the notes box at all it there are no notes.
   if ( $node->recipe_notes ) {
     $node->content['recipe_notes'] = array(
@@ -989,7 +1005,25 @@ function theme_recipe_summary($variables) {
   $output = '<div class="recipe-summary">';
 
   if ( $show_title ) {
-    $output .= '<h2 class="title">' . t('Summary') . '</h2>';
+
+    global $base_url;
+    $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$node->nid;
+        $result = db_query($sql);
+        foreach ($result as $item) {
+            $sql2 = "SELECT * FROM {file_managed} WHERE fid = ".$item->field_recipe_image_fid;
+            $result2 = db_query($sql2);
+            foreach ($result2 as $item2) {
+                $path2 = $item2->uri;
+                $path2 = substr($path2, 8);
+                $path2 = $base_url."/sites/default/files/".$path2;
+            }
+        }
+
+//<a href="myfile.htm"><img src="rainbow.gif"></a>
+
+    //$output .= '<a href="'.$path2.'"><img class = "img "src="'.$path2.'" border="4" alt="Rose 1"></a>';
+    $output .= '<a href="'.$path2.'"><img src="'.$path2.'"></a>';
+    $output .= '<h2 class="title">' . t('Zusammenfassung') . '</h2>';
   }
 
   $output .= '<table>';
@@ -1015,7 +1049,7 @@ function theme_recipe_summary($variables) {
       }
       $_text .= format_plural($_minutes, '1 minute', '@count minutes');
     }
-    
+
 
     // Wrap description in RDFa markup.
     if ( !empty($node->rdf_mapping['recipe_preptime']) ) {
@@ -1075,6 +1109,9 @@ function theme_recipe_summary($variables) {
     }
 
     $output .= '<tr><th>' . t('Total time') . '</th><td>' . $_text . '</td></tr>';
+    $output .= '<tr><td colspan="2"><a href="'.$base_url.'/add_recipe_notes/'.$node->nid.'">Notiz hinzufügen/bearbeiten</a></td></tr>';
+    $output .= '<tr><td colspan="2"><a href="'.$base_url.'/recipe_add_to_history/'.$node->nid.'">Heute gekocht</a></td></tr>';
+    $output .= '<tr><td colspan="2"><a href="'.$base_url.'/add_to_category/'.$node->nid.'">Rezept speichern</a></td></tr>';
   }
 
   $output .= '</table>';
@@ -1348,7 +1385,7 @@ function recipe_validate($node, $form, &$form_state) {
       $return = FALSE;
     }
   }
-  
+
   if (!is_numeric($form_state['values']['recipe_preptime']) || $form_state['values']['recipe_preptime'] < 0) {
     form_set_error('recipe_preptime', t('Preparation time must be a valid positive integer. Utilize 0 for N/A.'));
     $return = FALSE;
@@ -1357,7 +1394,7 @@ function recipe_validate($node, $form, &$form_state) {
     form_set_error('recipe_cooktime', t('Cooking time must be a valid positive integer. Utilize 0 for N/A.'));
     $return = FALSE;
   }
-  
+
   return $return;
 }
 
@@ -1468,11 +1505,12 @@ function recipe_yield_form($form, &$form_state, $node, $show_yield_form) {
       '#markup' => ($node->recipe_yield_unit == '')?t('Servings'):$node->recipe_yield_unit,
       '#suffix' => '<br/>',
     );
+
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Change'),
       '#attributes' => array('class' => array('recipe-yield-change')),
-    );
+    );/*
     $form['reset'] = array(
       '#type' => 'submit',
       '#value' => t('Reset'),
@@ -1487,7 +1525,7 @@ function recipe_yield_form($form, &$form_state, $node, $show_yield_form) {
       '#type' => 'submit',
       '#value' => t('Double'),
       '#attributes' => array('class' => array('recipe-yield-double')),
-    );
+    );*/
   }
 
   return $form;
@@ -2019,43 +2057,40 @@ function recipe_duration_iso8601($data = '') {
 function recipe_get_units($limit_to_preferred = 0) {
 
   $us_units = array(
-    'cup' =>             array('name' => t('cup'),         'plural' => t('cups'),         'abbreviation' => t('c'),     'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
-    'us liquid pint' =>  array('name' => t('pint'),        'plural' => t('pints'),        'abbreviation' => t('pt'),    'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
-    'us liquid quart' => array('name' => t('quart'),       'plural' => t('quarts'),       'abbreviation' => t('q'),     'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
-    'us gallon' =>       array('name' => t('gallon'),      'plural' => t('gallons'),      'abbreviation' => t('gal'),   'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
-    'pound' =>           array('name' => t('pound'),       'plural' => t('pounds'),       'abbreviation' => t('lb'),    'system' => 'us customary', 'type' => t('weight'), 'aliases' => array()),
-    'ounce' =>           array('name' => t('ounce'),       'plural' => t('ounces'),       'abbreviation' => t('oz'),    'system' => 'us customary', 'type' => t('weight'), 'aliases' => array()),
-    'us fluid ounce' =>  array('name' => t('fluid ounce'), 'plural' => t('fluid ounces'), 'abbreviation' => t('fl oz'), 'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
+    'becher' =>             array('name' => t('Becher'),         'plural' => t('Becher'),         'abbreviation' => t('Becher'),     'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
+    'beutel' =>             array('name' => t('Beutel'),         'plural' => t('Beutel'),         'abbreviation' => t('Beutel'),    'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
+    'blatt' =>              array('name' => t('Blatt'),          'plural' => t('Blätter'),       'abbreviation' => t('Blatt'),     'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
+    'bund' =>       array('name' => t('Bund'),      'plural' => t('Bund'),      'abbreviation' => t('Bund'),   'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
+    'pfund' =>           array('name' => t('Pfund'),       'plural' => t('Pfund'),       'abbreviation' => t('Pfund'),    'system' => 'us customary', 'type' => t('weight'), 'aliases' => array()),
+    'zehen' =>           array('name' => t('Zehe'),       'plural' => t('Zehen'),       'abbreviation' => t('Zehe(n)'),    'system' => 'us customary', 'type' => t('weight'), 'aliases' => array()),
+
   );
 
   $si_units = array(
-    'milliliter' => array('name' => t('milliliter'), 'plural' => t('milliliters'), 'abbreviation' => t('ml'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
-    'centiliter' => array('name' => t('centiliter'), 'plural' => t('centiliters'), 'abbreviation' => t('cl'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
-    'liter' =>      array('name' => t('liter'),      'plural' => t('liters'),      'abbreviation' => t('l'),   'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
-    'deciliter' =>  array('name' => t('deciliter'),  'plural' => t('deciliters'),  'abbreviation' => t('dl'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
-    'milligram' =>  array('name' => t('milligram'),  'plural' => t('milligrams'),  'abbreviation' => t('mg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
-    'gram' =>       array('name' => t('gram'),       'plural' => t('grams'),       'abbreviation' => t('g'),   'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
-    'centigram' =>  array('name' => t('centigram'),  'plural' => t('centigrams'),  'abbreviation' => t('cg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
-    'kilogram' =>   array('name' => t('kilogram'),   'plural' => t('kilograms'),   'abbreviation' => t('kg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
+    'milliliter' => array('name' => t('Milliliter'), 'plural' => t('Milliliter'), 'abbreviation' => t('ml'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
+    'centiliter' => array('name' => t('Zentiliter'), 'plural' => t('Centiliter'), 'abbreviation' => t('cl'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
+    'liter' =>      array('name' => t('Liter'),      'plural' => t('Liter'),      'abbreviation' => t('l'),   'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
+    'deciliter' =>  array('name' => t('Deziliter'),  'plural' => t('Deziliter'),  'abbreviation' => t('dl'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
+    'milligram' =>  array('name' => t('Milligramm'),  'plural' => t('Milligramm'),  'abbreviation' => t('mg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
+    'gram' =>       array('name' => t('Gramm'),       'plural' => t('Gramm'),       'abbreviation' => t('g'),   'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
+    'centigram' =>  array('name' => t('Zentigramm'),  'plural' => t('Zentigramm'),  'abbreviation' => t('cg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
+    'kilogram' =>   array('name' => t('Kilogramm'),   'plural' => t('Kilogramm'),   'abbreviation' => t('kg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
   );
 
   $common_units = array(
-    'tablespoon' => array('name' => t('tablespoon'), 'plural' => t('tablespoons'), 'abbreviation' => t('T'),   'system' => 'common', 'type' => t('volume'), 'aliases' => array('tbsp','tb')),
-    'teaspoon' =>   array('name' => t('teaspoon'),   'plural' => t('teaspoons'),   'abbreviation' => t('t'),   'system' => 'common', 'type' => t('volume'), 'aliases' => array('tsp')),
+    'essloeffel' => array('name' => t('Esslöffel'), 'plural' => t('Esslöffel'), 'abbreviation' => t('EL'),   'system' => 'common', 'type' => t('volume'), 'aliases' => array('tbsp','tb')),
+    'teeloeffel' =>   array('name' => t('Teelöffel'),   'plural' => t('Teelöffel'),   'abbreviation' => t('TL'),   'system' => 'common', 'type' => t('volume'), 'aliases' => array('tsp')),
 
-    'slice' =>    array('name' => t('slice'),   'plural' => t('slices'),   'abbreviation' => t('sli'), 'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'clove' =>    array('name' => t('clove'),   'plural' => t('cloves'),   'abbreviation' => t('clv'), 'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'load' =>     array('name' => t('loaf'),    'plural' => t('loaves'),   'abbreviation' => t('lf'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'pinch' =>    array('name' => t('pinch'),   'plural' => t('pinches'),  'abbreviation' => t('pn'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'package' =>  array('name' => t('package'), 'plural' => t('packages'), 'abbreviation' => t('pk'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array('pack')),
-    'can' =>      array('name' => t('can'),     'plural' => t('cans'),     'abbreviation' => t('cn'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array('jar')),
-    'drop' =>     array('name' => t('drop'),    'plural' => t('drops'),    'abbreviation' => t('dr'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'bunch' =>    array('name' => t('bunch'),   'plural' => t('bunches'),  'abbreviation' => t('bn'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'dash' =>     array('name' => t('dash'),    'plural' => t('dashes'),   'abbreviation' => t('ds'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'carton' =>   array('name' => t('carton'),  'plural' => t('cartons'),  'abbreviation' => t('ct'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'scheibe' =>    array('name' => t('Scheibe'),   'plural' => t('Scheiben'),   'abbreviation' => t('Scheibe(n)'), 'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'prise' =>    array('name' => t('Prise'),   'plural' => t('Prisen'),  'abbreviation' => t('Prise(n)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'paket' =>  array('name' => t('Paket'), 'plural' => t('Pakete'), 'abbreviation' => t('Paket(e)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array('pack')),
+    'dose' =>      array('name' => t('Dose'),     'plural' => t('Dosen'),     'abbreviation' => t('Dose(n)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array('jar')),
+    'tropfen' =>     array('name' => t('Tropfen'),    'plural' => t('Tropfen'),    'abbreviation' => t('Tropfen'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'karton' =>   array('name' => t('Karton'),  'plural' => t('Kartons'),  'abbreviation' => t('Karton(s)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'stueck' =>   array('name' => t('Stück'),  'plural' => t('Stücke'),  'abbreviation' => t('Stück'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
 
-    'unit' =>     array('name' => t('unit'),    'plural' => t('units'),    'abbreviation' => '', 'system' => 'common', 'type' => t('indefinite'), 'aliases' => array('each', 'ea', 'whole')),
-    'unknown' =>  array('name' => t('unknown'), 'plural' => t('unknown'),  'abbreviation' => '', 'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array())
+    'einheit' =>     array('name' => t('Einheit'),    'plural' => t('Einheiten'),    'abbreviation' => '', 'system' => 'common', 'type' => t('indefinite'), 'aliases' => array('each', 'ea', 'whole')),
+    'unbekannt' =>  array('name' => t('Unbekannt'), 'plural' => t('Unbekannt'),  'abbreviation' => '', 'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array())
   );
 
 

@@ -16,6 +16,10 @@
   width: 7em;
 }
 
+.recipe-section {
+  max-width: 540px;
+}
+
 
 /*
  * import preview

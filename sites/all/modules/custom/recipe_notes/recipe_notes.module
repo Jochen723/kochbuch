@@ -1,0 +1,67 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jonaskortum
+ * Date: 21.02.17
+ * Time: 21:52
+ */
+
+function recipe_notes_menu() {
+
+    $items['add_recipe_notes/%'] = array(
+        'title' => 'Rezeptsuche',
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('recipe_notes_form'),
+    );
+
+    return $items;
+}
+
+function recipe_notes_form() {
+
+    $test = recipe_notes_load_notes();
+
+    $form['notes'] = array(
+        '#title' => t('Notiz hinzufügen'),
+        '#resizable' => FALSE,
+        '#type' => 'textarea',
+        '#default_value' => $test,
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Speichern',
+        '#submit' => array('recipe_notes_save_notes')
+    );
+        return $form;
+}
+
+function recipe_notes_save_notes($form, &$form_state) {
+
+    global $user;
+
+    $recipe_id = arg(1);
+
+    $notes = $form_state['values']['notes'];
+    $sql = "INSERT INTO {recipe_notes} (recipe_id, uid, note) VALUES (".$recipe_id.",".$user->uid.",'".$notes."')";
+    db_query($sql);
+    drupal_goto("node/".$recipe_id);
+}
+
+function recipe_notes_load_notes() {
+    $recipe_id = arg(1);
+    global $user;
+
+    $note = "";
+
+    $sql = "SELECT * FROM {recipe_notes} WHERE recipe_ID = ".$recipe_id." AND uid = ".$user->uid;
+    $result = db_query($sql);
+
+    foreach ($result as $item) {
+        $note = $item->note;
+    }
+
+    return $note;
+
+}

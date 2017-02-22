@@ -19,6 +19,7 @@ function recipe_overview_menu() {
 }
 
 function recipe_overview_get_recipes() {
+    $test = "hehe";
     $array = recipe_overview_get_recipes2();
     $test = recipe_overview_create_content($array);
 
@@ -32,20 +33,73 @@ function recipe_overview_create_content($recipes) {
     $test = "";
     $name = "";
     $path2 = "";
-    $test .= '
-<style>.img150
-{
-float: left;
-width: 150px;
-padding: 3px;
-font-size: 0.7em;
-} </style>
+    $bla = '
+    <style>
+.city {
+ float: left;
+ margin: 5px;
+ max-width: 300px;
+ width: 180px;
+ height: 180px;
+ padding: 3px;
+ font-size: 0.7em;
+}
+
+.img {
+    width:  200px;
+    height: 150px;
+}
+</style>
 ';
 
     global $base_url;
-    $path = $base_url."/sites/default/files/";
+
+
+
 
     for($i = 0; $i<sizeof($recipes); $i++) {
+
+        $path = "";
+        $name = "";
+        $sql = "SELECT * FROM {node} WHERE nid = ".$recipes[$i];
+        $result = db_query($sql);
+        foreach ($result as $item) {
+            $name = $item->title;
+        }
+
+        $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$recipes[$i];
+        $result = db_query($sql);
+        foreach ($result as $item) {
+            $sql2 = "SELECT * FROM {file_managed} WHERE fid = ".$item->field_recipe_image_fid;
+            $result2 = db_query($sql2);
+            foreach ($result2 as $item2) {
+                $path2 = $item2->uri;
+                $path2 = substr($path2, 8);
+                $path2 = $base_url."/sites/default/files/".$path2;
+            }
+
+
+        }
+
+
+
+
+
+
+        $bla .= '
+
+ <tr><td>
+
+ <div class="city">
+ <a href="'.$base_url.'/node/'.$recipes[$i].'"</a> <img class = "img "src="'.$path2.'" border="4" alt="Rose 1"><h3>'.$name.'</h3>
+ </div>
+
+ ';
+
+
+
+
+/*
 
         $path2 = "";
         $recipe_id = 16;
@@ -66,47 +120,64 @@ font-size: 0.7em;
             $name = $item->title;
         }
 
+        $bla .= '
 
-        $test .='
-<div class="img150">
-<img src="'.$path.$path2.'" width="150" height="150" border="0" alt="'.$path.'Beispielbild.jpeg">
-<a href="/kochbuch/rezeptansicht/'.$recipes[$i].'/4">'.$name.'</a>
-</div>
-';
-        if ($i+1%4 == 0 && $i>0) {
-           $test .= '<br style="clear: both;">
+ <tr><td>
 
- ';}
+ <div class="city">
+ <img class = "img "src="'.$path.$path2.'" border="4" alt="Rose 1"><h3><a href="/kochbuch/rezeptansicht/'.$recipes[$i].'/4">'.$name.'</a></h3>
+ </div>
+
+ ';*/
+
+        /*
+                $test .= '
+               <td>
+               <div style="overflow-x:auto;" class="img150">
+               <img src="https://wikispeicher.ch/w/images/6/6c/Beispielbild.jpg" width="150" height="150" border="0" alt="Rose 1">
+               Bilduntertext zur Rose 1
+               </div>';*/
+
+
+
+
+
+
+
+
+//<img src="'.$path.$path2.'" width="150" height="150" border="0" alt="'.$path.'Beispielbild.jpeg">
+
+        /*
+                $test .='
+        <div class="img150">
+        <a href="/kochbuch/rezeptansicht/'.$recipes[$i].'/4">'.$name.'</a>
+        </div>
+        ';
+                if ($i+1%4 == 0 && $i>0) {
+                    $test .= '<br style="clear: both;">
+
+         ';}*/
+
 
 
     }
 
+    $test .= "</table>";
+    $bla .= "</table>";
 
-
-    return $test;
+    return $bla;
 }
 
 function recipe_overview_get_recipes2() {
 
     $recipes = array();
 
-    $sql = "SELECT recipe_id FROM {recipe}";
+    $sql = "SELECT * FROM {recipe}";
     $result = db_query($sql);
 
     foreach ($result as $r) {
-        array_push($recipes, $r->recipe_id);
+        array_push($recipes, $r->nid);
     }
 
     return $recipes;
 }
-
-function recipe_overview_node_view($node, $view_mode, $langcode) {
-    if(!strcmp($node->type, "rezept")) {
-        $reference = 30;
-        $quantity = 4;
-
-        drupal_goto("/rezeptansicht/".$reference."/".$quantity);
-    }
-}
-
-

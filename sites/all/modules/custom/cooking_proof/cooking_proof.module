@@ -15,8 +15,71 @@ function cooking_proof_menu() {
         'type' => MENU_CALLBACK,
     );
 
+    $items['recipe_add_to_history'] = array(
+        'title' => 'Rezeptübersicht',
+        'page callback' => 'cooking_proof_add_to_history',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
     return $items;
 }
+
+function cooking_proof_add_to_history() {
+
+    $recipe_id = arg(1);
+
+    $node2 = node_load($recipe_id);
+
+    drupal_set_message($node2->title);
+
+    global $user;
+
+    $heute = date("Y-m-d H:i:s");
+
+    db_insert('recipe_cooked')
+        ->fields(array(
+            'recipe_id' => $recipe_id,
+            'date' => $heute,
+            'uid' => $user->uid,
+        ))
+        ->execute();
+
+
+    $node = new stdClass();
+    $node->type = 'rezepthistorie';
+    node_object_prepare($node);
+
+    $node->language = LANGUAGE_NONE;
+
+    $node->title = $node2->uid . ", ". $node2->title;
+
+    $date = new DateTime($heute);
+
+    $date->sub(new DateInterval('PT1H'));
+    $deadline2 = $date->format('Y-m-d H:i:s');
+
+    $deadline2 = str_replace(" ", "T", $deadline2);
+
+    $node->field_datum[$node->language][0]['value'] = $deadline2;
+    $node->field_datum[$node->language][0]['timezone'] = "Europe/Berlin";
+    $node->field_datum[$node->language][0]['timezone_db'] = "Europe/Berlin";
+
+    $node->field_rezeptname[$node->language][0]['value'] = $node2->title;
+    $node->field_nutzerreferenz[$node->language][0]['value'] = $user->uid;
+
+
+    $node->field_referenz[$node->language][0]['value'] = $node2->nid;
+
+// Save node
+    node_save($node);
+
+
+    drupal_set_message("Rezept zur Historie hinzugefügt");
+    drupal_goto("/node/".$recipe_id);
+
+}
+
 
 function cooking_proof_get_cooking_history() {
 
