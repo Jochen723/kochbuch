@@ -1,0 +1,130 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jonaskortum
+ * Date: 22.02.17
+ * Time: 20:13
+ */
+
+function recipe_recommendation_menu() {
+
+    $items['recipe_recommendation/%'] = array(
+        'title' => 'Rezeptübersicht',
+        'page callback' => 'recipe_recommendation_recommend',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+function recipe_recommendation_recommend() {
+    $node_id = arg(1);
+    global $user;
+    $heute = date("Y-m-d H:i:s");
+
+    db_insert('recipe_recommendation')
+        ->fields(array(
+            'sender_id' => $user->uid,
+            'recipe_id' => $node_id,
+            'recommendation_date' => $heute,
+        ))
+        ->execute();
+
+    drupal_set_message("Rezept wurde deinen Freunden empfohlen");
+    drupal_goto("node/".$node_id);
+}
+
+
+function recipe_recommendation_block_info() {
+    $blocks = array();
+    $blocks['my_block2'] = array(
+        'info' => t('Rezeptempfehlung'),
+    );
+
+    return $blocks;
+}
+
+function recipe_recommendation_block_view($delta = '') {
+    // This example is adapted from node.module.
+    $block = array();
+
+    switch ($delta) {
+        case 'my_block2':
+
+            global $user;
+            global $base_url;
+
+            $recommendations = array();
+            $friends = array();
+
+            $sql = "SELECT * FROM {user_relationships} WHERE requester_id = ".$user->uid;
+            $result = db_query($sql);
+
+            foreach ($result as $item) {
+                array_push($friends, $item->requestee_id);
+            }
+
+            $list = implode(',', $friends);
+
+            $date = new DateTime();//now
+            $interval = new DateInterval('P1M');// P[eriod] 1 M[onth]
+            $date->sub($interval);
+            $before_date = $date->format('Y-m-d');
+
+
+            $sql = "SELECT * FROM {recipe_recommendation} WHERE DATE(recommendation_date) > '".$before_date."' AND sender_id IN (".$list.")";
+            $result = db_query($sql);
+
+            foreach ($result as $item) {
+                array_push($recommendations, array($item->recipe_id,$item->sender_id));
+            }
+            
+            if(sizeof($recommendations) >0) {
+                $rand_keys = array_rand($recommendations, 1);
+                print_r($recommendations[$rand_keys]);
+
+                $name = "";
+
+                $sql = "SELECT * FROM {users} WHERE uid = ".$recommendations[$rand_keys][1];
+                $result = db_query($sql);
+                foreach ($result as $item) {
+                    $name = $item->name;
+                }
+
+                $recipe = "";
+
+                $sql = "SELECT * FROM {node} WHERE nid = ".$recommendations[$rand_keys][0];
+                $result = db_query($sql);
+                foreach ($result as $item) {
+                    $recipe = $item->title;
+                }
+
+                $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$recommendations[$rand_keys][0];
+                $result = db_query($sql);
+                foreach ($result as $item) {
+                    $sql2 = "SELECT * FROM {file_managed} WHERE fid = ".$item->field_recipe_image_fid;
+                    $result2 = db_query($sql2);
+                    foreach ($result2 as $item2) {
+                        $path2 = $item2->uri;
+                        $path2 = substr($path2, 8);
+                        $path2 = $base_url."/sites/default/files/".$path2;
+                    }
+
+
+                }
+
+                $block['subject'] = t('Rezeptempfehlung');
+                $block['content'] = '<p>'.$name.' hat folgendes Rezept empfohlen:</p>';
+                $block['content'] .= ' <img class = "img "src="'.$path2.'" border="4" alt="Rose 1"><h3>'.$recipe.'</h3><br><br>';
+            } else {
+                $block['subject'] = t('Rezeptempfehlung');
+                $block['content'] = '<p>Keine Empfehlungen vorhanden</p>';
+            }
+
+
+
+            break;
+    }
+    return $block;
+}
