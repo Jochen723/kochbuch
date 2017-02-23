@@ -82,8 +82,6 @@ function recipe_recommendation_block_view($delta = '') {
 
             if(sizeof($recommendations) >0) {
                 $rand_keys = array_rand($recommendations, 1);
-                print_r($recommendations[$rand_keys]);
-
                 $name = "";
 
                 $sql = "SELECT * FROM {users} WHERE uid = ".$recommendations[$rand_keys][1];
@@ -116,7 +114,8 @@ function recipe_recommendation_block_view($delta = '') {
 
                 $block['subject'] = t('Rezeptempfehlung');
                 $block['content'] = '<p>'.$name.' hat folgendes Rezept empfohlen:</p>';
-                $block['content'] .= ' <img class = "img "src="'.$path2.'" border="4" alt="Rose 1"><h3>'.$recipe.'</h3><br><br>';
+                $block['content'] .= '<a href="'.$base_url.'/node/'.$recommendations[$rand_keys][0].'"</a> <img class = "img "src="'.$path2.'" border="4" alt="Rose 1"><h3>'.$recipe.'</h3><br><br>';
+                //$block['content'] .= ' <img class = "img "src="'.$path2.'" border="4" alt="Rose 1"><h3>'.$recipe.'</h3><br><br>';
             } else {
                 $block['subject'] = t('Rezeptempfehlung');
                 $block['content'] = '<p>Keine Empfehlungen vorhanden</p>';
