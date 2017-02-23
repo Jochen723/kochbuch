@@ -1112,7 +1112,6 @@ function theme_recipe_summary($variables) {
     $output .= '<tr><td colspan="2"><a href="'.$base_url.'/add_recipe_notes/'.$node->nid.'">Notiz hinzufügen/bearbeiten</a></td></tr>';
     $output .= '<tr><td colspan="2"><a href="'.$base_url.'/recipe_add_to_history/'.$node->nid.'">Heute gekocht</a></td></tr>';
     $output .= '<tr><td colspan="2"><a href="'.$base_url.'/add_to_category/'.$node->nid.'">Rezept speichern</a></td></tr>';
-        $output .= '<tr><td colspan="2"><a href="'.$base_url.'/recipe_recommendation/'.$node->nid.'">Rezept empfehlen</a></td></tr>';
   }
 
   $output .= '</table>';
