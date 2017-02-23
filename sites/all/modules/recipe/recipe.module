@@ -1109,7 +1109,28 @@ function theme_recipe_summary($variables) {
       $_text = theme('rdf_template_variable_wrapper', array('content' => $_text, 'attributes' => $attributes, 'inline' => FALSE));
     }
 
+$personal_counter = 0;
+$overall_counter = 0;
+
+global $user;
+
+$sql = "SELECT * FROM {field_data_field_referenz} as ref INNER JOIN {node} as node ON ref.field_referenz_value = node.nid WHERE node.nid = ".$node->nid;
+$result = db_query($sql);
+foreach ($result as $value) {
+  # code...
+
+drupal_set_message("HEHE");
+
+  if($value->uid == $user->uid) {
+    $personal_counter++;
+  }
+  $overall_counter++;
+}
+
+
     $output .= '<tr><th>' . t('Total time') . '</th><td>' . $_text . '</td></tr>';
+    $output .= '<tr><th>' . t('Von dir gekocht:') . '</th><td>'.$personal_counter.'x</td></tr>';
+    $output .= '<tr><th>' . t('Insgesamt:') . '</th><td>'.$overall_counter.'x</td></tr>';
     $output .= '<tr><td colspan="2"><a href="'.$base_url.'/add_recipe_notes/'.$node->nid.'">Notiz hinzufügen/bearbeiten</a></td></tr>';
     $output .= '<tr><td colspan="2"><a href="'.$base_url.'/recipe_add_to_history/'.$node->nid.'">Heute gekocht</a></td></tr>';
     $output .= '<tr><td colspan="2"><a href="'.$base_url.'/add_to_category/'.$node->nid.'">Rezept speichern</a></td></tr>';
