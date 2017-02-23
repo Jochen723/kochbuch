@@ -19,7 +19,6 @@ function recipe_overview_menu() {
 }
 
 function recipe_overview_get_recipes() {
-    $test = "hehe";
     $array = recipe_overview_get_recipes2();
     $test = recipe_overview_create_content($array);
 
@@ -172,7 +171,7 @@ function recipe_overview_get_recipes2() {
 
     $recipes = array();
 
-    $sql = "SELECT * FROM {recipe}";
+    $sql = "SELECT * FROM {recipe} as re INNER JOIN {node} as node ON re.nid = node.nid ORDER BY node.title";
     $result = db_query($sql);
 
     foreach ($result as $r) {
