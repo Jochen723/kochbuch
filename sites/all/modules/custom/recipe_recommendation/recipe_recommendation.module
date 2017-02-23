@@ -91,6 +91,7 @@ function recipe_recommendation_block_view($delta = '') {
                 }
 
                 $recipe = "";
+                $path2 = "http://www.gemaa-tempelsee.info/wp-content/uploads/2017/01/kein-bild-vorhanden.gif";
 
                 $sql = "SELECT * FROM {node} WHERE nid = ".$recommendations[$rand_keys][0];
                 $result = db_query($sql);

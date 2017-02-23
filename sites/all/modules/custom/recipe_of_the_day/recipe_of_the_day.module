@@ -25,6 +25,7 @@ function recipe_of_the_day_block_view($delta = '') {
             global $base_url;
 
             $nid = 0;
+            $path2 = "http://www.gemaa-tempelsee.info/wp-content/uploads/2017/01/kein-bild-vorhanden.gif";
             $name = "";
 
             $sql = "SELECT * FROM {recipe} ORDER BY RAND() LIMIT 0,1;";
