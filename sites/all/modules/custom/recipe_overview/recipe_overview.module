@@ -66,6 +66,8 @@ function recipe_overview_create_content($recipes) {
             $name = $item->title;
         }
 
+        $path2 = "http://www.gemaa-tempelsee.info/wp-content/uploads/2017/01/kein-bild-vorhanden.gif";
+
         $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$recipes[$i];
         $result = db_query($sql);
         foreach ($result as $item) {
