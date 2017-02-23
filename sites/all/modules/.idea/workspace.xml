@@ -113,27 +113,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recipe_of_the_day.info" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.info">
+      <file leaf-file-name="recipe_of_the_day.module" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-              <folding />
+            <state vertical-scroll-proportion="-35.217392">
+              <caret line="54" column="162" selection-start-line="54" selection-start-column="162" selection-end-line="54" selection-end-column="162" />
+              <folding>
+                <element signature="e#6#91#0#PHP" expanded="true" />
+                <marker date="1487791441000" expanded="true" signature="533:581" placeholder="SELECT * FRO... " />
+                <marker date="1487791441000" expanded="true" signature="734:766" placeholder="SELECT * FRO... " />
+                <marker date="1487791441000" expanded="true" signature="734:767" placeholder="SELECT * FRO... " />
+                <marker date="1487791441000" expanded="true" signature="927:990" placeholder="SELECT * FRO... " />
+                <marker date="1487791441000" expanded="true" signature="927:991" placeholder="SELECT * FRO... " />
+                <marker date="1487791441000" expanded="true" signature="1103:1144" placeholder="SELECT * FRO... " />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recipe_of_the_day.module" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module">
+      <file leaf-file-name="recipe_recommendation.module" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-37.826088">
-              <caret line="58" column="1" selection-start-line="58" selection-start-column="1" selection-end-line="58" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.6302003">
+              <caret line="81" column="12" selection-start-line="81" selection-start-column="12" selection-end-line="81" selection-end-column="12" />
               <folding>
                 <element signature="e#6#91#0#PHP" expanded="true" />
-                <marker date="1487834653000" expanded="true" signature="533:581" placeholder="SELECT * FRO... " />
-                <marker date="1487834653000" expanded="true" signature="734:767" placeholder="SELECT * FRO... " />
-                <marker date="1487834653000" expanded="true" signature="927:991" placeholder="SELECT * FRO... " />
-                <marker date="1487834653000" expanded="true" signature="1103:1144" placeholder="SELECT * FRO... " />
+                <marker date="1487794787000" expanded="true" signature="1345:1400" placeholder="SELECT * FRO... " />
+                <marker date="1487794787000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
+                <marker date="1487794787000" expanded="true" signature="1833:1942" placeholder="SELECT * FRO... " />
+                <marker date="1487794787000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
+                <marker date="1487794787000" expanded="true" signature="1833:1953" placeholder="SELECT * FRO... " />
+                <marker date="1487794787000" expanded="true" signature="2367:2401" placeholder="SELECT * FRO... " />
+                <marker date="1487794787000" expanded="true" signature="2638:2671" placeholder="SELECT * FRO... " />
+                <marker date="1487794787000" expanded="true" signature="2880:2944" placeholder="SELECT * FRO... " />
+                <marker date="1487794787000" expanded="true" signature="3095:3136" placeholder="SELECT * FRO... " />
               </folding>
             </state>
           </provider>
@@ -143,26 +156,18 @@
         <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.info">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+              <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recipe_recommendation.module" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.module">
+      <file leaf-file-name="recipe_of_the_day.info" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.info">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.862426">
-              <caret line="129" column="1" selection-start-line="129" selection-start-column="1" selection-end-line="129" selection-end-column="1" />
-              <folding>
-                <element signature="e#6#91#0#PHP" expanded="true" />
-                <marker date="1487834722000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
-                <marker date="1487834722000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
-                <marker date="1487834722000" expanded="true" signature="2355:2389" placeholder="SELECT * FRO... " />
-                <marker date="1487834722000" expanded="true" signature="2626:2659" placeholder="SELECT * FRO... " />
-                <marker date="1487834722000" expanded="true" signature="2868:2932" placeholder="SELECT * FRO... " />
-                <marker date="1487834722000" expanded="true" signature="3083:3124" placeholder="SELECT * FRO... " />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="23" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -195,8 +200,8 @@
         <option value="$PROJECT_DIR$/custom/recipe_overview/recipe_overview.module" />
         <option value="$PROJECT_DIR$/custom/category/category.module" />
         <option value="$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.info" />
-        <option value="$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module" />
         <option value="$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.info" />
+        <option value="$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module" />
         <option value="$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.module" />
       </list>
     </option>
@@ -306,7 +311,61 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="recipe_overview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="custom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="recipe_of_the_day" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="custom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="recipe_notes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="custom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cooking_proof" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -784,6 +843,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.info">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="23" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.info">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-35.217392">
+          <caret line="54" column="162" selection-start-line="54" selection-start-column="162" selection-end-line="54" selection-end-column="162" />
+          <folding>
+            <element signature="e#6#91#0#PHP" expanded="true" />
+            <marker date="1487791441000" expanded="true" signature="533:581" placeholder="SELECT * FRO... " />
+            <marker date="1487791441000" expanded="true" signature="734:766" placeholder="SELECT * FRO... " />
+            <marker date="1487791441000" expanded="true" signature="734:767" placeholder="SELECT * FRO... " />
+            <marker date="1487791441000" expanded="true" signature="927:990" placeholder="SELECT * FRO... " />
+            <marker date="1487791441000" expanded="true" signature="927:991" placeholder="SELECT * FRO... " />
+            <marker date="1487791441000" expanded="true" signature="1103:1144" placeholder="SELECT * FRO... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_notes/recipe_notes.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-29.347826">
+          <caret line="45" column="44" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="44" />
+          <folding>
+            <element signature="e#6#91#0#PHP" expanded="true" />
+            <marker date="1487712380000" expanded="true" signature="952:1010" placeholder="INSERT INTO " />
+            <marker date="1487712380000" expanded="true" signature="952:1025" placeholder="INSERT INTO " />
+            <marker date="1487712380000" expanded="true" signature="952:1041" placeholder="INSERT INTO " />
+            <marker date="1487712380000" expanded="true" signature="952:1053" placeholder="INSERT INTO " />
+            <marker date="1487712380000" expanded="true" signature="1226:1298" placeholder="SELECT * FRO... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/custom/cooking_proof/cooking_proof.module">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.0">
@@ -826,63 +932,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_notes/recipe_notes.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-29.347826">
-          <caret line="45" column="44" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="44" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487712380000" expanded="true" signature="952:1010" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="952:1025" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="952:1041" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="952:1053" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="1226:1298" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-37.826088">
-          <caret line="58" column="1" selection-start-line="58" selection-start-column="1" selection-end-line="58" selection-end-column="1" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487834653000" expanded="true" signature="533:581" placeholder="SELECT * FRO... " />
-            <marker date="1487834653000" expanded="true" signature="734:767" placeholder="SELECT * FRO... " />
-            <marker date="1487834653000" expanded="true" signature="927:991" placeholder="SELECT * FRO... " />
-            <marker date="1487834653000" expanded="true" signature="1103:1144" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.862426">
-          <caret line="129" column="1" selection-start-line="129" selection-start-column="1" selection-end-line="129" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.6302003">
+          <caret line="81" column="12" selection-start-line="81" selection-start-column="12" selection-end-line="81" selection-end-column="12" />
           <folding>
             <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487834722000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
-            <marker date="1487834722000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
-            <marker date="1487834722000" expanded="true" signature="2355:2389" placeholder="SELECT * FRO... " />
-            <marker date="1487834722000" expanded="true" signature="2626:2659" placeholder="SELECT * FRO... " />
-            <marker date="1487834722000" expanded="true" signature="2868:2932" placeholder="SELECT * FRO... " />
-            <marker date="1487834722000" expanded="true" signature="3083:3124" placeholder="SELECT * FRO... " />
+            <marker date="1487794787000" expanded="true" signature="1345:1400" placeholder="SELECT * FRO... " />
+            <marker date="1487794787000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
+            <marker date="1487794787000" expanded="true" signature="1833:1942" placeholder="SELECT * FRO... " />
+            <marker date="1487794787000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
+            <marker date="1487794787000" expanded="true" signature="1833:1953" placeholder="SELECT * FRO... " />
+            <marker date="1487794787000" expanded="true" signature="2367:2401" placeholder="SELECT * FRO... " />
+            <marker date="1487794787000" expanded="true" signature="2638:2671" placeholder="SELECT * FRO... " />
+            <marker date="1487794787000" expanded="true" signature="2880:2944" placeholder="SELECT * FRO... " />
+            <marker date="1487794787000" expanded="true" signature="3095:3136" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
