@@ -22,16 +22,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="cooking_proof.module" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cooking_proof.module" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/custom/cooking_proof/cooking_proof.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51035506">
-              <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="45" column="20" selection-start-line="39" selection-start-column="4" selection-end-line="45" selection-end-column="20" />
               <folding>
-                <marker date="1487921594000" expanded="true" signature="2239:2280" placeholder="SELECT * FRO... " />
-                <marker date="1487921594000" expanded="true" signature="2239:2281" placeholder="SELECT * FRO... " />
-                <marker date="1487921594000" expanded="true" signature="3083:3123" placeholder="SELECT * FRO... " />
-                <marker date="1487921594000" expanded="true" signature="3083:3124" placeholder="SELECT * FRO... " />
+                <marker date="1487709007000" expanded="true" signature="2044:2085" placeholder="SELECT * FRO... " />
+                <marker date="1487709007000" expanded="true" signature="2044:2086" placeholder="SELECT * FRO... " />
+                <marker date="1487709007000" expanded="true" signature="2888:2928" placeholder="SELECT * FRO... " />
+                <marker date="1487709007000" expanded="true" signature="2888:2929" placeholder="SELECT * FRO... " />
               </folding>
             </state>
           </provider>
@@ -40,7 +40,7 @@
       <file leaf-file-name="ingredient_search.module" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/custom/ingredient_search/ingredient_search.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.565218">
+            <state vertical-scroll-proportion="0.0">
               <caret line="35" column="1" selection-start-line="20" selection-start-column="0" selection-end-line="35" selection-end-column="1" />
               <folding>
                 <marker date="1486400643000" expanded="true" signature="888:1003" placeholder="SELECT DISTI... " />
@@ -65,12 +65,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ingredient_search.info" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/custom/ingredient_search/ingredient_search.info">
+      <file leaf-file-name="recipe_overview.module" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/custom/recipe_overview/recipe_overview.module">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
-              <folding />
+              <caret line="81" column="9" selection-start-line="69" selection-start-column="8" selection-end-line="81" selection-end-column="9" />
+              <folding>
+                <marker date="1487705970000" expanded="true" signature="689:868" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="697:812" placeholder="{...}" />
+                <marker date="1487705970000" expanded="true" signature="819:860" placeholder="{...}" />
+                <marker date="1487705970000" expanded="true" signature="1002:1035" placeholder="SELECT * FRO... " />
+                <marker date="1487705970000" expanded="true" signature="1183:1246" placeholder="SELECT * FRO... " />
+                <marker date="1487705970000" expanded="true" signature="1183:1247" placeholder="SELECT * FRO... " />
+                <marker date="1487705970000" expanded="true" signature="1355:1396" placeholder="SELECT * FRO... " />
+                <marker date="1487705970000" expanded="true" signature="1716:1882" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="1720:1882" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="1741:1743" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="1741:1751" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="1741:1752" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="1741:1771" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="1741:1857" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="1741:1858" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="1741:1879" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="2458:2476" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="2462:2476" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="2700:2727" placeholder="..." />
+                <marker date="1487705970000" expanded="true" signature="3511:3533" placeholder="SELECT * FRO... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,7 +99,7 @@
       <file leaf-file-name="recipe_notes.module" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/custom/recipe_notes/recipe_notes.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-29.347826">
+            <state vertical-scroll-proportion="0.0">
               <caret line="45" column="44" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="44" />
               <folding>
                 <element signature="e#6#91#0#PHP" expanded="true" />
@@ -96,8 +117,24 @@
         <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.info">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="recipe_of_the_day.module" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="54" column="162" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="162" />
+              <folding>
+                <element signature="e#6#91#0#PHP" expanded="true" />
+                <marker date="1487834653000" expanded="true" signature="533:581" placeholder="SELECT * FRO... " />
+                <marker date="1487834653000" expanded="true" signature="734:767" placeholder="SELECT * FRO... " />
+                <marker date="1487834653000" expanded="true" signature="927:991" placeholder="SELECT * FRO... " />
+                <marker date="1487834653000" expanded="true" signature="1103:1144" placeholder="SELECT * FRO... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -112,29 +149,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recipe_overview.info" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/custom/recipe_overview/recipe_overview.info">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recipe_recommendation.module" pinned="false" current-in-tab="false">
+      <file leaf-file-name="recipe_recommendation.module" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-60.652172">
-              <caret line="93" column="110" selection-start-line="93" selection-start-column="110" selection-end-line="93" selection-end-column="110" />
+            <state vertical-scroll-proportion="0.3106509">
+              <caret line="83" column="61" selection-start-line="83" selection-start-column="61" selection-end-line="83" selection-end-column="61" />
               <folding>
                 <element signature="e#6#91#0#PHP" expanded="true" />
-                <marker date="1487872809000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
-                <marker date="1487872809000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
-                <marker date="1487872809000" expanded="true" signature="2299:2333" placeholder="SELECT * FRO... " />
-                <marker date="1487872809000" expanded="true" signature="2681:2714" placeholder="SELECT * FRO... " />
-                <marker date="1487872809000" expanded="true" signature="2923:2987" placeholder="SELECT * FRO... " />
-                <marker date="1487872809000" expanded="true" signature="3138:3179" placeholder="SELECT * FRO... " />
+                <marker date="1487838134000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
+                <marker date="1487838134000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
+                <marker date="1487838134000" expanded="true" signature="2299:2333" placeholder="SELECT * FRO... " />
+                <marker date="1487838134000" expanded="true" signature="2570:2603" placeholder="SELECT * FRO... " />
+                <marker date="1487838134000" expanded="true" signature="2812:2876" placeholder="SELECT * FRO... " />
+                <marker date="1487838134000" expanded="true" signature="3027:3068" placeholder="SELECT * FRO... " />
               </folding>
             </state>
           </provider>
@@ -150,6 +177,7 @@
         <option value="$PROJECT_DIR$/custom/send_newsletter/send_newsletter.info" />
         <option value="$PROJECT_DIR$/custom/send_newsletter/send_newsletter.module" />
         <option value="$PROJECT_DIR$/custom/text_boxes/text_boxes.info" />
+        <option value="$PROJECT_DIR$/custom/ingredient_search/ingredient_search.info" />
         <option value="$PROJECT_DIR$/custom/recipe_overview/recipe_overview.info" />
         <option value="$PROJECT_DIR$/custom/recipe/recipe_get_preview.inc" />
         <option value="$PROJECT_DIR$/custom/ingredient_search/ingredient_search.module" />
@@ -160,18 +188,16 @@
         <option value="$PROJECT_DIR$/custom/recipe/recipe.module" />
         <option value="$PROJECT_DIR$/custom/recipe/recipe_get_overview.inc" />
         <option value="/private/var/folders/bs/9xdjvsp53zg86j8m86trcjpc0000gn/T/fz3temp-2/recipe_overview.module" />
+        <option value="$PROJECT_DIR$/custom/cooking_proof/cooking_proof.module" />
         <option value="$PROJECT_DIR$/custom/recipe_notes/recipe_notes.info" />
         <option value="$PROJECT_DIR$/custom/recipe_notes/recipe_notes.module" />
         <option value="$PROJECT_DIR$/custom/category/category.info" />
-        <option value="$PROJECT_DIR$/custom/category/category.module" />
-        <option value="$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.info" />
         <option value="$PROJECT_DIR$/custom/recipe_overview/recipe_overview.module" />
-        <option value="$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.module" />
-        <option value="$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module" />
+        <option value="$PROJECT_DIR$/custom/category/category.module" />
         <option value="$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.info" />
-        <option value="/private/var/folders/bs/9xdjvsp53zg86j8m86trcjpc0000gn/T/fz3temp-2/recipe.module" />
-        <option value="$PROJECT_DIR$/custom/ingredient_search/ingredient_search.info" />
-        <option value="$PROJECT_DIR$/custom/cooking_proof/cooking_proof.module" />
+        <option value="$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module" />
+        <option value="$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.info" />
+        <option value="$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.module" />
       </list>
     </option>
   </component>
@@ -216,7 +242,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -281,84 +306,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="recipe_overview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="custom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="recipe_of_the_day" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="custom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recipe_notes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="custom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ingredient_search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="custom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cooking_proof" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -421,9 +375,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1984375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1984375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -458,108 +412,15 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/custom/recipe_overview/recipe_overview.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1487872711000" expanded="true" signature="669:848" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="677:792" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="799:840" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="982:1015" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1330" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1331" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1439:1480" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1800:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1804:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1827" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1835" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1836" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1855" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1941" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1942" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1963" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2542:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2546:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2784:2811" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="3595:3617" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3620" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3641" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3690" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_notes/recipe_notes.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="44" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="44" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487712380000" expanded="true" signature="952:1010" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="952:1025" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="952:1041" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="952:1053" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="1226:1298" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="162" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="162" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487872828000" expanded="true" signature="640:688" placeholder="SELECT * FRO... " />
-            <marker date="1487872828000" expanded="true" signature="841:874" placeholder="SELECT * FRO... " />
-            <marker date="1487872828000" expanded="true" signature="1034:1098" placeholder="SELECT * FRO... " />
-            <marker date="1487872828000" expanded="true" signature="1210:1251" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="61" selection-start-line="83" selection-start-column="61" selection-end-line="83" selection-end-column="61" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487872809000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="2299:2333" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="2681:2714" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="2923:2987" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="3138:3179" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/custom/cooking_proof/cooking_proof.module">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="20" selection-start-line="39" selection-start-column="4" selection-end-line="45" selection-end-column="20" />
           <folding>
-            <marker date="1487921594000" expanded="true" signature="2239:2280" placeholder="SELECT * FRO... " />
-            <marker date="1487921594000" expanded="true" signature="2239:2281" placeholder="SELECT * FRO... " />
-            <marker date="1487921594000" expanded="true" signature="3083:3123" placeholder="SELECT * FRO... " />
-            <marker date="1487921594000" expanded="true" signature="3083:3124" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2044:2085" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2044:2086" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2888:2928" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2888:2929" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
@@ -593,29 +454,26 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="81" column="9" selection-start-line="69" selection-start-column="8" selection-end-line="81" selection-end-column="9" />
           <folding>
-            <marker date="1487872711000" expanded="true" signature="669:848" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="677:792" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="799:840" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="982:1015" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1330" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1331" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1439:1480" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1800:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1804:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1827" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1835" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1836" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1855" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1941" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1942" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1963" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2542:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2546:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2784:2811" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="3595:3617" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3620" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3641" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3690" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="689:868" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="697:812" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="819:860" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="1002:1035" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1246" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1247" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1355:1396" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1716:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1720:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1743" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1751" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1752" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1771" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1857" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1858" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1879" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2458:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2462:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2700:2727" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="3511:3533" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
@@ -649,10 +507,10 @@
           <caret line="54" column="162" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="162" />
           <folding>
             <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487872828000" expanded="true" signature="640:688" placeholder="SELECT * FRO... " />
-            <marker date="1487872828000" expanded="true" signature="841:874" placeholder="SELECT * FRO... " />
-            <marker date="1487872828000" expanded="true" signature="1034:1098" placeholder="SELECT * FRO... " />
-            <marker date="1487872828000" expanded="true" signature="1210:1251" placeholder="SELECT * FRO... " />
+            <marker date="1487834653000" expanded="true" signature="533:581" placeholder="SELECT * FRO... " />
+            <marker date="1487834653000" expanded="true" signature="734:767" placeholder="SELECT * FRO... " />
+            <marker date="1487834653000" expanded="true" signature="927:991" placeholder="SELECT * FRO... " />
+            <marker date="1487834653000" expanded="true" signature="1103:1144" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
@@ -671,12 +529,12 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487872809000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="2299:2333" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="2681:2714" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="2923:2987" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="3138:3179" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="2299:2333" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="2570:2603" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="2812:2876" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="3027:3068" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
@@ -686,10 +544,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="15" selection-end-column="6" />
           <folding>
-            <marker date="1487921594000" expanded="true" signature="2239:2280" placeholder="SELECT * FRO... " />
-            <marker date="1487921594000" expanded="true" signature="2239:2281" placeholder="SELECT * FRO... " />
-            <marker date="1487921594000" expanded="true" signature="3083:3123" placeholder="SELECT * FRO... " />
-            <marker date="1487921594000" expanded="true" signature="3083:3124" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2044:2085" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2044:2086" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2888:2928" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2888:2929" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
@@ -723,29 +581,26 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="81" column="9" selection-start-line="69" selection-start-column="8" selection-end-line="81" selection-end-column="9" />
           <folding>
-            <marker date="1487872711000" expanded="true" signature="669:848" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="677:792" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="799:840" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="982:1015" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1330" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1331" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1439:1480" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1800:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1804:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1827" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1835" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1836" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1855" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1941" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1942" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1963" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2542:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2546:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2784:2811" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="3595:3617" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3620" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3641" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3690" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="689:868" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="697:812" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="819:860" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="1002:1035" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1246" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1247" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1355:1396" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1716:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1720:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1743" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1751" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1752" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1771" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1857" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1858" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1879" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2458:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2462:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2700:2727" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="3511:3533" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
@@ -769,29 +624,26 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1487872711000" expanded="true" signature="669:848" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="677:792" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="799:840" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="982:1015" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1330" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1331" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1439:1480" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1800:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1804:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1827" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1835" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1836" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1855" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1941" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1942" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1963" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2542:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2546:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2784:2811" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="3595:3617" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3620" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3641" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3690" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="689:868" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="697:812" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="819:860" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="1002:1035" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1246" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1247" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1355:1396" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1716:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1720:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1743" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1751" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1752" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1771" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1857" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1858" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1879" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2458:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2462:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2700:2727" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="3511:3533" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
@@ -815,29 +667,26 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="70" column="51" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
           <folding>
-            <marker date="1487872711000" expanded="true" signature="669:848" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="677:792" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="799:840" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="982:1015" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1330" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1331" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1439:1480" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1800:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1804:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1827" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1835" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1836" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1855" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1941" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1942" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1963" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2542:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2546:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2784:2811" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="3595:3617" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3620" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3641" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3690" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="689:868" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="697:812" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="819:860" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="1002:1035" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1246" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1247" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1355:1396" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1716:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1720:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1743" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1751" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1752" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1771" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1857" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1858" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1879" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2458:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2462:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2700:2727" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="3511:3533" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
@@ -854,29 +703,26 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
-            <marker date="1487872711000" expanded="true" signature="669:848" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="677:792" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="799:840" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="982:1015" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1330" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1331" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1439:1480" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1800:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1804:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1827" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1835" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1836" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1855" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1941" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1942" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1963" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2542:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2546:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2784:2811" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="3595:3617" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3620" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3641" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3690" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="689:868" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="697:812" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="819:860" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="1002:1035" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1246" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1247" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1355:1396" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1716:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1720:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1743" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1751" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1752" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1771" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1857" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1858" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1879" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2458:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2462:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2700:2727" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="3511:3533" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
@@ -893,29 +739,26 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
-            <marker date="1487872711000" expanded="true" signature="669:848" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="677:792" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="799:840" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="982:1015" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1330" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1331" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1439:1480" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1800:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1804:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1827" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1835" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1836" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1855" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1941" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1942" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1963" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2542:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2546:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2784:2811" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="3595:3617" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3620" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3641" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3690" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="689:868" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="697:812" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="819:860" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="1002:1035" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1246" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1247" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1355:1396" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1716:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1720:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1743" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1751" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1752" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1771" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1857" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1858" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1879" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2458:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2462:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2700:2727" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="3511:3533" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
@@ -952,6 +795,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_overview/recipe_overview.info">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06437768">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -976,6 +826,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/custom/ingredient_search/ingredient_search.info">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/custom/category/category.info">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -983,144 +840,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/custom/category/category.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-80.86957">
-          <caret line="129" column="39" selection-start-line="123" selection-start-column="4" selection-end-line="129" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.2173915">
-          <caret line="27" column="106" selection-start-line="27" selection-start-column="106" selection-end-line="27" selection-end-column="106" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487872828000" expanded="true" signature="640:688" placeholder="SELECT * FRO... " />
-            <marker date="1487872828000" expanded="true" signature="841:874" placeholder="SELECT * FRO... " />
-            <marker date="1487872828000" expanded="true" signature="1034:1098" placeholder="SELECT * FRO... " />
-            <marker date="1487872828000" expanded="true" signature="1210:1251" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_overview/recipe_overview.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-41.086956">
-          <caret line="68" column="102" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="102" />
-          <folding>
-            <marker date="1487872711000" expanded="true" signature="669:848" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="677:792" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="799:840" placeholder="{...}" />
-            <marker date="1487872711000" expanded="true" signature="982:1015" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1330" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1267:1331" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1439:1480" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="1800:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1804:1966" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1827" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1835" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1836" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1855" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1941" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1942" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="1825:1963" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2542:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2546:2560" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="2784:2811" placeholder="..." />
-            <marker date="1487872711000" expanded="true" signature="3595:3617" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3620" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3641" placeholder="SELECT * FRO... " />
-            <marker date="1487872711000" expanded="true" signature="3595:3690" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-60.652172">
-          <caret line="93" column="110" selection-start-line="93" selection-start-column="110" selection-end-line="93" selection-end-column="110" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487872809000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="2299:2333" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="2681:2714" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="2923:2987" placeholder="SELECT * FRO... " />
-            <marker date="1487872809000" expanded="true" signature="3138:3179" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_overview/recipe_overview.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_notes/recipe_notes.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/recipe_notes/recipe_notes.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-29.347826">
-          <caret line="45" column="44" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="44" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="true" />
-            <marker date="1487712380000" expanded="true" signature="952:1010" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="952:1025" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="952:1041" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="952:1053" placeholder="INSERT INTO " />
-            <marker date="1487712380000" expanded="true" signature="1226:1298" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/custom/ingredient_search/ingredient_search.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///private/var/folders/bs/9xdjvsp53zg86j8m86trcjpc0000gn/T/fz3temp-2/cooking_proof.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1487921560000" expanded="true" signature="2205:2247" placeholder="SELECT * FRO... " />
-            <marker date="1487921560000" expanded="true" signature="3049:3090" placeholder="SELECT * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/custom/ingredient_search/ingredient_search.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.565218">
+        <state vertical-scroll-proportion="0.0">
           <caret line="35" column="1" selection-start-line="20" selection-start-column="0" selection-end-line="35" selection-end-column="1" />
           <folding>
             <marker date="1486400643000" expanded="true" signature="888:1003" placeholder="SELECT DISTI... " />
@@ -1134,15 +856,120 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_notes/recipe_notes.info">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/category/category.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-80.86957">
+          <caret line="129" column="39" selection-start-line="123" selection-start-column="4" selection-end-line="129" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/custom/cooking_proof/cooking_proof.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51035506">
-          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="20" selection-start-line="39" selection-start-column="4" selection-end-line="45" selection-end-column="20" />
           <folding>
-            <marker date="1487921594000" expanded="true" signature="2239:2280" placeholder="SELECT * FRO... " />
-            <marker date="1487921594000" expanded="true" signature="2239:2281" placeholder="SELECT * FRO... " />
-            <marker date="1487921594000" expanded="true" signature="3083:3123" placeholder="SELECT * FRO... " />
-            <marker date="1487921594000" expanded="true" signature="3083:3124" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2044:2085" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2044:2086" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2888:2928" placeholder="SELECT * FRO... " />
+            <marker date="1487709007000" expanded="true" signature="2888:2929" placeholder="SELECT * FRO... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_overview/recipe_overview.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="9" selection-start-line="69" selection-start-column="8" selection-end-line="81" selection-end-column="9" />
+          <folding>
+            <marker date="1487705970000" expanded="true" signature="689:868" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="697:812" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="819:860" placeholder="{...}" />
+            <marker date="1487705970000" expanded="true" signature="1002:1035" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1246" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1183:1247" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1355:1396" placeholder="SELECT * FRO... " />
+            <marker date="1487705970000" expanded="true" signature="1716:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1720:1882" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1743" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1751" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1752" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1771" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1857" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1858" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="1741:1879" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2458:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2462:2476" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="2700:2727" placeholder="..." />
+            <marker date="1487705970000" expanded="true" signature="3511:3533" placeholder="SELECT * FRO... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_notes/recipe_notes.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="44" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="44" />
+          <folding>
+            <element signature="e#6#91#0#PHP" expanded="true" />
+            <marker date="1487712380000" expanded="true" signature="952:1010" placeholder="INSERT INTO " />
+            <marker date="1487712380000" expanded="true" signature="952:1025" placeholder="INSERT INTO " />
+            <marker date="1487712380000" expanded="true" signature="952:1041" placeholder="INSERT INTO " />
+            <marker date="1487712380000" expanded="true" signature="952:1053" placeholder="INSERT INTO " />
+            <marker date="1487712380000" expanded="true" signature="1226:1298" placeholder="SELECT * FRO... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.info">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.info">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_of_the_day/recipe_of_the_day.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="162" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="162" />
+          <folding>
+            <element signature="e#6#91#0#PHP" expanded="true" />
+            <marker date="1487834653000" expanded="true" signature="533:581" placeholder="SELECT * FRO... " />
+            <marker date="1487834653000" expanded="true" signature="734:767" placeholder="SELECT * FRO... " />
+            <marker date="1487834653000" expanded="true" signature="927:991" placeholder="SELECT * FRO... " />
+            <marker date="1487834653000" expanded="true" signature="1103:1144" placeholder="SELECT * FRO... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/custom/recipe_recommendation/recipe_recommendation.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3106509">
+          <caret line="83" column="61" selection-start-line="83" selection-start-column="61" selection-end-line="83" selection-end-column="61" />
+          <folding>
+            <element signature="e#6#91#0#PHP" expanded="true" />
+            <marker date="1487838134000" expanded="true" signature="1345:1401" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="1833:1952" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="2299:2333" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="2570:2603" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="2812:2876" placeholder="SELECT * FRO... " />
+            <marker date="1487838134000" expanded="true" signature="3027:3068" placeholder="SELECT * FRO... " />
           </folding>
         </state>
       </provider>
