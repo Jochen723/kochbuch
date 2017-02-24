@@ -26,8 +26,6 @@ function cooking_proof_menu() {
 }
 
 function cooking_proof_form_alter(&$form, &$form_state, $form_id) {
-    drupal_set_message("TESTFORM");
-    drupal_set_message($form_id);
     if (!strcmp($form_id, 'rezepthistorie_node_form')) {
         $form['title']['#disabled'] = TRUE;
     }
