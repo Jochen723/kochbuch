@@ -43,6 +43,6 @@ function watchlist_schema() {
  * Implements hook_update_N()
  */
 
-function watchlist_id_update_7000() {
+function watchlist_update_7000() {
     drupal_install_schema('watchlist');
 }
