@@ -1,0 +1,118 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jonaskortum
+ * Date: 24.02.17
+ * Time: 17:28
+ */
+
+function watchlist_menu() {
+    $items['merkliste'] = array(
+        'title' => 'Merkliste',
+        'page callback' => 'watchlist_show_recipes',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['entferne_rezept_von_merkliste/%'] = array(
+        'page callback' => 'watchlist_remove_recipe',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['rezept_der_merkliste_hinzufuegen/%'] = array(
+        'page callback' => 'watchlist_add_recipe',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+function watchlist_show_recipes() {
+
+    global $user;
+    global $base_url;
+
+    $sql = "SELECT * FROM {recipe_watchlist} AS watch INNER JOIN {node} AS node ON watch.recipe_id = node.nid  WHERE watch.uid = ".$user->uid." ORDER BY node.title";
+    $result = db_query($sql);
+
+    $table_string = '<style>
+.city {
+ margin: 5px;
+ max-width: 300px;
+ width: 180px;
+ height: 180px;
+ padding: 3px;
+ font-size: 0.7em;
+}
+
+.img {
+    width:  200px;
+    height: 150px;
+}
+</style>';
+
+
+    $table_string .= '
+    <table>
+        <tr>
+            <th  width="25%">Bild</th>
+            <th>Name</th>
+            <th>Aktion</th>
+        </tr>';
+
+
+    foreach ($result as $item) {
+
+        $path2 = "http://www.gemaa-tempelsee.info/wp-content/uploads/2017/01/kein-bild-vorhanden.gif";
+
+        $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$item->recipe_id;
+        $result = db_query($sql);
+        foreach ($result as $item3) {
+            $sql2 = "SELECT * FROM {file_managed} WHERE fid = ".$item3->field_recipe_image_fid;
+            $result2 = db_query($sql2);
+            foreach ($result2 as $item2) {
+                $path2 = $item2->uri;
+                $path2 = substr($path2, 8);
+                $path2 = $base_url."/sites/default/files/".$path2;
+            }
+        }
+
+        $table_string .= '
+        <tr>
+            <td align="right"><img class = "img "src="'.$path2.'" border="4" alt="Rose 1"></td>
+            <td><a href="'.$base_url.'/node/'.$item->recipe_id.'">'.$item->title.'</td>
+            <td><a href="'.$base_url.'/entferne_rezept_von_merkliste/'.$item->recipe_id.'">von Merkliste löschen</td>
+        </tr>';
+
+        
+    }
+    $table_string .= '</table>';
+
+    return $table_string;
+}
+
+function watchlist_add_recipe() {
+    $recipe_id = arg(1);
+
+    global $user;
+
+    $sql = "INSERT INTO {recipe_watchlist} (uid, recipe_id) VALUES (".$user->uid.", ".$recipe_id.")";
+    db_query($sql);
+
+    drupal_set_message("Rezept wurde der Merkliste hinzugefügt");
+    drupal_goto("merkliste");
+}
+
+function watchlist_remove_recipe() {
+    $recipe_id = arg(1);
+
+    global $user;
+
+    $sql = "DELETE FROM {recipe_watchlist} WHERE uid = ".$user->uid." AND recipe_id = ".$recipe_id;
+    db_query($sql);
+
+    drupal_set_message("Rezept wurde von der Merkliste entfernt");
+    drupal_goto("merkliste");
+}
