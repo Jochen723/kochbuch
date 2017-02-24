@@ -15,6 +15,13 @@ function cooking_proof_menu() {
         'type' => MENU_CALLBACK,
     );
 
+    $items['entferne_rezepthistorie/%'] = array(
+        'title' => 'Rezeptübersicht',
+        'page callback' => 'cooking_proof_delete_from_history',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
     $items['recipe_add_to_history'] = array(
         'title' => 'Rezeptübersicht',
         'page callback' => 'cooking_proof_add_to_history',
@@ -31,13 +38,18 @@ function cooking_proof_form_alter(&$form, &$form_state, $form_id) {
     }
 }
 
+function cooking_proof_delete_from_history() {
+    node_delete(arg(1));
+
+    drupal_set_message("Objekt wurde gelöscht");
+    drupal_goto("vergangene_Gerichte");
+}
+
 function cooking_proof_add_to_history() {
 
     $recipe_id = arg(1);
 
     $node2 = node_load($recipe_id);
-
-    drupal_set_message($node2->title);
 
     global $user;
 
@@ -89,26 +101,109 @@ function cooking_proof_add_to_history() {
 
 function cooking_proof_get_cooking_history() {
 
+
     global $user;
-
-    $sql = "SELECT * FROM {recipe_cooked} WHERE uid = ".$user->uid;
-    $result = db_query($sql);
-
-    $tempString = "<table><th>Nr.</th><th>Rezeptname</th> <th> Datum</th><th>Aktionen</th>";
-
-    $i=1;
     global $base_url;
-    foreach ($result as $item) {
-        $name = cooking_proof_get_recipe_name_from_id($item->recipe_id);
-        $date = new DateTime($item->date);
-        $deadline3 = $date->format('d.m.Y');
 
-        //"<a href='/design_thinking_tool/delete_task/$pro->task_id'>löschen</a>
-        $tempString .= "<tr><td>$i</td><td><a href='$base_url/rezeptansicht/$item->recipe_id/$name->number_of_persons'>$name->title</a></td><td>$deadline3</td><td></td></tr>";
-        $i++;
+    $heute = date("Y-m-d 00:00:00");
+    $heute = date('Y-m-d H:i:s', strtotime($heute . ' +1 day'));
+
+    $sql = "SELECT * FROM {node} as node INNER JOIN {field_data_field_datum} as date on node.nid = date.entity_id WHERE node.type = 'rezepthistorie' AND node.uid = ".$user->uid." AND field_datum_value <= '".$heute."' ORDER BY field_datum_value";
+
+    $tempString = '
+    <style>
+.city {
+ float: left;
+ margin: 5px;
+ max-width: 300px;
+ width: 180px;
+ height: 180px;
+ padding: 3px;
+ font-size: 0.7em;
+}
+
+.img {
+    width:  200px;
+    height: 150px;
+}
+</style>
+';
+
+
+    $tempString .= "<h1>vergangene Gerichte</h1>";
+    $tempString .= "<table><th width=\"22%\">Nr.</th><th>Rezeptname</th> <th> Datum</th><th>Aktionen</th>";
+    $recipe_id = 0;
+
+    $result = db_query($sql);
+    foreach ($result as $item) {
+        $path2 = "http://www.gemaa-tempelsee.info/wp-content/uploads/2017/01/kein-bild-vorhanden.gif";
+
+        $sql = "SELECT * FROM {field_data_field_referenz} WHERE entity_id = ".$item->nid;
+        $result = db_query($sql);
+        foreach ($result as $item2) {
+            $recipe_id = $item2->field_referenz_value;
+        }
+
+
+        $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$recipe_id;
+        $result = db_query($sql);
+        foreach ($result as $item3) {
+            $sql2 = "SELECT * FROM {file_managed} WHERE fid = ".$item3->field_recipe_image_fid;
+            $result2 = db_query($sql2);
+            foreach ($result2 as $item2) {
+                $path2 = $item2->uri;
+                $path2 = substr($path2, 8);
+                $path2 = $base_url."/sites/default/files/".$path2;
+            }
+        }
+
+        $phpdate = strtotime( $item->field_datum_value);
+        $mysqldate = date( 'd.m.Y', $phpdate );
+
+        $tempString .= "<tr><td><img class = \"img \"src=\"".$path2."\" border=\"4\" alt=\"Rose 1\"></td><td><a href='".$base_url."/node/".$recipe_id."'>".$item->title."</a></td><td>".$mysqldate."</td><td><ul><li><a href='".$base_url."/node/".$item->nid."/edit'>bearbeiten</a></li><li><a href='".$base_url."/entferne_rezepthistorie/".$item->nid."'>entfernen</a></li></ul></td></tr>";
     }
     
     $tempString .= "</table><br>";
+
+
+    $tempString .= "<h1>geplante Gerichte</h1>";
+    $tempString .= "<table><th width=\"22%\">Nr.</th><th>Rezeptname</th> <th> Datum</th><th>Aktionen</th>";
+
+    $sql = "SELECT * FROM {node} as node INNER JOIN {field_data_field_datum} as date on node.nid = date.entity_id WHERE node.type = 'rezepthistorie' AND node.uid = ".$user->uid." AND field_datum_value > '".$heute."' ORDER BY field_datum_value";
+    $result = db_query($sql);
+
+    foreach ($result as $item4) {
+        $phpdate = strtotime( $item4->field_datum_value);
+        $mysqldate = date( 'd.m.Y', $phpdate );
+
+        $sql = "SELECT * FROM {field_data_field_referenz} WHERE entity_id = ".$item4->nid;
+        $result = db_query($sql);
+        foreach ($result as $item2) {
+            $recipe_id = $item2->field_referenz_value;
+        }
+
+
+        $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$recipe_id;
+        $result = db_query($sql);
+        foreach ($result as $item3) {
+            $sql2 = "SELECT * FROM {file_managed} WHERE fid = ".$item3->field_recipe_image_fid;
+            $result2 = db_query($sql2);
+            foreach ($result2 as $item2) {
+                $path2 = $item2->uri;
+                $path2 = substr($path2, 8);
+                $path2 = $base_url."/sites/default/files/".$path2;
+            }
+        }
+
+        $tempString .= "<tr><td><img class = \"img \"src=\"".$path2."\" border=\"4\" alt=\"Rose 1\"></td><td><a href='".$base_url."/node/".$recipe_id."'>".$item4->title."</a></td><td>".$mysqldate."</td><td><ul><li><a href='".$base_url."/node/".$item4->nid."/edit'>bearbeiten</a></li><li><a href='".$base_url."/entferne_rezepthistorie/".$item4->nid."'>entfernen</a></li></ul></td></tr>";
+    }
+
+
+
+    $tempString .= "</table>";
+
+
+
 
     return $tempString;
 }
