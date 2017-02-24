@@ -25,6 +25,12 @@ function cooking_proof_menu() {
     return $items;
 }
 
+function cooking_proof_form_alter(&$form, &$form_state, $form_id) {
+    if (!strcmp($form_id, 'rezepthistorie_node_form')) {
+        $form['title']['#disabled'] = TRUE;
+    }
+}
+
 function cooking_proof_add_to_history() {
 
     $recipe_id = arg(1);
@@ -52,7 +58,7 @@ function cooking_proof_add_to_history() {
 
     $node->language = LANGUAGE_NONE;
 
-    $node->title = $node2->uid . ", ". $node2->title;
+    $node->title = $node2->title;
 
     $date = new DateTime($heute);
 
@@ -65,7 +71,7 @@ function cooking_proof_add_to_history() {
     $node->field_datum[$node->language][0]['timezone'] = "Europe/Berlin";
     $node->field_datum[$node->language][0]['timezone_db'] = "Europe/Berlin";
 
-    $node->field_rezeptname[$node->language][0]['value'] = $node2->title;
+    $node->field_namenreferenz[$node->language][0]['value'] = $node2->title;
     $node->field_nutzerreferenz[$node->language][0]['value'] = $user->uid;
 
 
