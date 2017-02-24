@@ -1119,8 +1119,6 @@ $result = db_query($sql);
 foreach ($result as $value) {
   # code...
 
-drupal_set_message("HEHE");
-
   if($value->uid == $user->uid) {
     $personal_counter++;
   }
