@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * Implement hook_schema()
+ */
+
+function watchlist_schema() {
+    $schema = array();
+
+    $schema['watchlist'] = array(
+        'description' => 'The table for the watchlist',
+        'fields' => array(
+            'watchlist_id' => array(
+                'description' => 'The primary identifier for watchlist.',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'uid' => array(
+                'description' => 'The user id',
+                'type' => 'int',
+                'not null' => FALSE,
+                'sortable' => TRUE,
+                'views' => TRUE,
+                'not null' => TRUE,
+            ),
+            'recipe_id' => array(
+                'description' => 'The event id',
+                'type' => 'int',
+                'sortable' => TRUE,
+                'views' => TRUE,
+                'not null' => TRUE,
+            ),
+        ),
+
+        'primary key' => array('watchlist_id'),
+    );
+
+    return $schema;
+}
+
+/**
+ * Implements hook_update_N()
+ */
+
+function watchlist_id_update_7000() {
+    drupal_install_schema('watchlist');
+}
