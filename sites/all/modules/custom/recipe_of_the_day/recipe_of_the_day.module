@@ -15,6 +15,59 @@ function recipe_of_the_day_block_info() {
     return $blocks;
 }
 
+function recipe_of_the_day_cron() {
+    drupal_set_message("Cron wurde vom Rezept des Tages ausgeführt!");
+
+    $sql = "SELECT * FROM {recipe_of_the_day} ORDER BY recipe_of_the_day_id DESC LIMIT 1";
+    $result = db_query($sql);
+
+    if($result->rowCount() == 0) {
+        $heute = date("Y-m-d");
+        $recipe_id = 0;
+        $sql = "SELECT * FROM {node} WHERE type ='recipe' ORDER BY RAND() LIMIT 1";
+        $result = db_query($sql);
+
+        foreach ($result as $item) {
+            $recipe_id = $item->nid;
+        }
+        db_insert('recipe_of_the_day')
+            ->fields(array(
+                'date' => $heute,
+                'recipe_id' => $recipe_id,
+            ))
+            ->execute();
+    } else {
+        foreach ($result as $item2) {
+            if(!isToday($item2->date)) {
+                $heute = date("Y-m-d");
+                $recipe_id = 0;
+                $sql = "SELECT * FROM {node} WHERE type ='recipe' ORDER BY RAND() LIMIT 1";
+                $result = db_query($sql);
+
+                foreach ($result as $item) {
+                    $recipe_id = $item->nid;
+                }
+                drupal_set_message("Letzter Eintrag ist nicht von heute, neue Rezept_ID: ".$recipe_id);
+
+                db_insert('recipe_of_the_day')
+                    ->fields(array(
+                        'date' => $heute,
+                        'recipe_id' => $recipe_id,
+                    ))
+                    ->execute();
+            } else {
+                drupal_set_message("Eintrag ist von heute");
+            }
+        }
+    }
+}
+
+function isToday($time) // midnight second
+{
+    return (strtotime($time) === strtotime('today'));
+}
+
+
 function recipe_of_the_day_block_view($delta = '') {
     // This example is adapted from node.module.
     $block = array();
@@ -28,10 +81,10 @@ function recipe_of_the_day_block_view($delta = '') {
             $path2 = "http://www.gemaa-tempelsee.info/wp-content/uploads/2017/01/kein-bild-vorhanden.gif";
             $name = "";
 
-            $sql = "SELECT * FROM {recipe} ORDER BY RAND() LIMIT 0,1;";
+            $sql = "SELECT * FROM {recipe_of_the_day} ORDER BY recipe_of_the_day_id DESC";
             $result = db_query($sql);
             foreach ($result as $item) {
-                $nid = $item->nid;
+                $nid = $item->recipe_id;
             }
 
             $sql = "SELECT * FROM {node} WHERE nid = ".$nid;
