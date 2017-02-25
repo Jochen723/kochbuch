@@ -36,18 +36,68 @@ function category_menu() {
         'type' => MENU_CALLBACK,
     );
 
+    $items['delete_category/%'] = array(
+        'title' => 'Rezeptübersicht',
+        'page callback' => 'category_delete_category',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['delete_recipe_from_category/%/%'] = array(
+        'title' => 'Rezeptübersicht',
+        'page callback' => 'category_delete_recipe_from_category',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
     return $items;
 }
+
+function category_delete_recipe_from_category() {
+    $recipe_id = arg(1);
+    $category_id = arg(2);
+
+    $sql = "DELETE FROM {recipe_user_category} WHERE category_id = ".$category_id." AND recipe_id = ".$recipe_id;
+    db_query($sql);
+
+    drupal_set_message("Rezept wurde aus der Kategorie entfernt");
+    drupal_goto("category");
+}
+
+function category_delete_category() {
+
+    $category_id = arg(1);
+    $counter = 0;
+
+    $sql = "SELECT * FROM {recipe_user_category} WHERE category_id = ".$category_id;
+    $result = db_query($sql);
+    foreach ($result as $item) {
+        $counter++;
+    }
+
+    if($counter == 0) {
+        $sql = "DELETE FROM {recipe_category} WHERE category_id =".$category_id;
+        db_query($sql);
+        drupal_set_message("Kategorie wurde entfernt!");
+    } else {
+        drupal_set_message("Sie können die Kategorie nicht entfernen, solange sich noch Rezepte darin befinden.", "error");
+    }
+
+    drupal_goto("category");
+}
+
 
 function category_category_overview() {
     $category = arg(1);
     global $base_url;
     global $user;
 
-    $bla = '
-    <style>
+
+    $sql = "SELECT * FROM {recipe_user_category} as cat INNER JOIN {node} as node on cat.recipe_id = node.nid WHERE cat.uid = ".$user->uid." AND category_id = ".$category;
+    $result = db_query($sql);
+
+    $table_string = '<style>
 .city {
- float: left;
  margin: 5px;
  max-width: 300px;
  width: 180px;
@@ -60,54 +110,49 @@ function category_category_overview() {
     width:  200px;
     height: 150px;
 }
-</style>
-';
+</style>';
 
-    $sql = "SELECT * FROM {recipe_user_category} WHERE uid = ".$user->uid." AND category_id = ".$category;
-    $result = db_query($sql);
+
+    $table_string .= '
+    <table>
+        <tr>
+            <th  width="25%">Bild</th>
+            <th>Name</th>
+            <th>Aktion</th>
+        </tr>';
+
 
     foreach ($result as $item) {
-        $path = "";
-        $name = "";
-        $sql = "SELECT * FROM {node} WHERE nid = ".$item->recipe_id;
-        $result = db_query($sql);
-        foreach ($result as $item2) {
-            $name = $item2->title;
-        }
+
+        $path2 = "http://www.gemaa-tempelsee.info/wp-content/uploads/2017/01/kein-bild-vorhanden.gif";
+
         $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$item->recipe_id;
         $result = db_query($sql);
         foreach ($result as $item3) {
             $sql2 = "SELECT * FROM {file_managed} WHERE fid = ".$item3->field_recipe_image_fid;
             $result2 = db_query($sql2);
-            foreach ($result2 as $item4) {
-                $path2 = $item4->uri;
+            foreach ($result2 as $item2) {
+                $path2 = $item2->uri;
                 $path2 = substr($path2, 8);
                 $path2 = $base_url."/sites/default/files/".$path2;
             }
         }
 
-        $bla .= '
-
- <tr><td>
-
- <div class="city">
- <a href="'.$base_url.'/node/'.$item->recipe_id.'"</a> <img class = "img "src="'.$path2.'" border="4" alt="Rose 1"><h3>'.$name.'</h3>
- </div>
-
- ';    }
 
 
 
-    $bla .= '</table>';
+        $table_string .= '
+        <tr>
+            <td align="right"><img class = "img "src="'.$path2.'" border="4" alt="Rose 1"></td>
+            <td><a href="'.$base_url.'/node/'.$item->recipe_id.'">'.$item->title.'</td>
+            <td><a href="'.$base_url.'/delete_recipe_from_category/'.$item->recipe_id.'/'.$category.'">aus Kategorie entfernen</td>
+        </tr>';
 
 
+    }
+    $table_string .= '</table>';
 
-
-
-
-
-return $bla;
-
+    return $table_string;
 
 }
 
@@ -129,14 +174,16 @@ function category_form() {
 
     $temp = array_count_values($array);
 
-    $tempString = "<table><th>Nr.</th><th>Name</th> <th>Anzahl Rezepte</th>";
+    $id = 1;
+
+    $tempString = "<table><th>Nr.</th><th>Name</th> <th>Anzahl Rezepte</th><th>Aktion</th>";
     foreach ($result as $item) {
         if(array_key_exists ($item->category_id , $temp)) {
         } else {
             $temp[$item->category_id] = 0;
         }
-        $tempString = $tempString . '<tr><td>1</td><td>'.$item->category.'</td><td><a href="'.$base_url.'/category_overview/'.$item->category_id.'/">'.$temp[$item->category_id].'</td></tr>';
-
+        $tempString = $tempString . '<tr><td>'.$id.'</td><td>'.$item->category.'</td><td><a href="'.$base_url.'/category_overview/'.$item->category_id.'/">'.$temp[$item->category_id].'</td><td><a href="'.$base_url.'/delete_category/'.$item->category_id.'">Kategorie entfernen</a></td></tr>';
+        $id++;
     }
 
 
@@ -211,22 +258,28 @@ function category_save_new_category($form, &$form_state) {
     global $user;
     $cat = $form_state['values']['category'];
 
-    $sql = "INSERT INTO {recipe_category} (category) VALUES ('".$cat."')";
-    db_query($sql);
+    if(strlen($cat) > 2) {
+        $sql = "INSERT INTO {recipe_category} (category) VALUES ('".$cat."')";
+        db_query($sql);
 
 
-    $id = db_insert('recipe_category')
-        ->fields(array(
-            'category' => $cat,
-        ))
-        ->execute();
+        $id = db_insert('recipe_category')
+            ->fields(array(
+                'category' => $cat,
+            ))
+            ->execute();
 
 
-    $sql = "INSERT INTO {user_category} (uid, category_id) VALUES (".$user->uid.",".$id.")";
-    db_query($sql);
+        $sql = "INSERT INTO {user_category} (uid, category_id) VALUES (".$user->uid.",".$id.")";
+        db_query($sql);
 
 
-    drupal_set_message("Kategorie erfolgreich angelegt");
+        drupal_set_message("Kategorie erfolgreich angelegt");
+    } else {
+        drupal_set_message("Der Kategoriename muss mindestens 3 Zeichen enthalten!", "error");
+    }
+
+
 
 }
 
