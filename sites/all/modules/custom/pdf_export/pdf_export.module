@@ -1,0 +1,158 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jonaskortum
+ * Date: 26.02.17
+ * Time: 14:18
+ */
+
+require_once(realpath(".") . "/sites/all/libraries/dompdf-0.6.1/dompdf_config.inc.php");
+include('mpdf60/mpdf.php');
+
+function pdf_export_menu()
+{
+
+    $items['rezept_pdf/%'] = array(
+        'access callback' => true,
+        'access callback' => 'user_is_logged_in',
+        'page callback' => 'pdf_export_create_pdf',
+    );
+
+    return $items;
+}
+
+function pdf_export_create_pdf() {
+
+    global $base_url;
+
+    $recipe_id = arg(1);
+    $name = "";
+    $inscructions = "";
+
+    $sql = "SELECT * FROM {node} WHERE nid = ".$recipe_id;
+    $result = db_query($sql);
+
+    foreach ($result as $item) {
+        $name = $item->title;
+    }
+
+    $sql = "SELECT * FROM {recipe} WHERE nid = ".$recipe_id;
+    $result2 = db_query($sql);
+
+    foreach ($result2 as $item2) {
+        $inscructions = $item2->instructions;
+    }
+
+    $path2 = "http://www.gemaa-tempelsee.info/wp-content/uploads/2017/01/kein-bild-vorhanden.gif";
+
+    $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$recipe_id;
+    $result = db_query($sql);
+    foreach ($result as $item) {
+        $sql2 = "SELECT * FROM {file_managed} WHERE fid = ".$item->field_recipe_image_fid;
+        $result2 = db_query($sql2);
+        foreach ($result2 as $item2) {
+            $path2 = $item2->uri;
+            $path2 = substr($path2, 8);
+            $path2 = $base_url."/sites/default/files/".$path2;
+        }
+    }
+
+    $ingredient_array = array();
+
+    $sql = "SELECT * FROM {recipe_node_ingredient} as node INNER JOIN {recipe_ingredient} as ing ON node.ingredient_id = ing.id WHERE nid = ".$recipe_id;
+    $result3 = db_query($sql);
+    foreach ($result3 as $item3) {
+        $pair = array();
+        $pair['anzahl'] = $item3->quantity;
+        $pair['einheit'] = $item3->unit_key;
+        $pair['zutat'] = $item3->name;
+
+        array_push($ingredient_array, $pair);
+    }
+
+    $ingredients = '<table style="font-size:11px;">';
+
+    foreach ($ingredient_array as $item5) {
+        $ingredients .= '
+        <tr>
+            <td>'.$item5["anzahl"].'</td>
+            <td>'.$item5["einheit"].'</td>
+            <td>'.$item5["zutat"].'</td>
+        </tr>';
+        };
+
+    $ingredients .= '</table>';
+
+
+
+
+
+    $html = '<html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Website</title>
+
+
+<style>
+.center  { text-align: center; }
+      .justify { text-align: justify; }
+	#container {
+		background:transparent;
+	}
+	#links{
+		margin-right: 300px;
+		background:transparent;
+
+	}
+	#links2{
+		margin-right: 100px;
+		background:transparent;
+
+	}
+	#rechts{
+		float: right;
+		width: 300px;
+	}
+
+</style>
+
+</head>
+<body>
+<h1 style="text-align:center">'.$name.'</h1>
+
+<div id="container">
+	<div id="rechts">
+		<h2>Zutaten</h2>'.$ingredients.'
+	</div>
+	<div id="links">
+		<img src="'.$path2.'" alt="Smiley face" height="200" width="270">
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<div id="container">
+	<div id="links2">
+		<h2>Zubereitung</h2>
+		<section class="center">
+      <p class="justify">'.$inscructions.'</p>
+    </section>
+		<div style="clear:both"></div>
+	</div>
+</div>
+</body>
+</html>
+';
+
+
+    $mpdf=new mPDF();
+    $mpdf->WriteHTML($html);
+    //$mpdf->WriteHTML($position_before_meeting);
+    $mpdf->Output();
+
+    $pdf = $dompdf->output();
+
+    return "Test";
+
+}

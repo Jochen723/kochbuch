@@ -1134,6 +1134,8 @@ foreach ($result as $value) {
     $output .= '<tr><td colspan="2"><a href="'.$base_url.'/rezept_der_merkliste_hinzufuegen/'.$node->nid.'">Rezept in Merkliste speichern</a></td></tr>';
     $output .= '<tr><td colspan="2"><a href="'.$base_url.'/add_to_category/'.$node->nid.'">Rezept in Kategorie speichern</a></td></tr>';
     $output .= '<tr><td colspan="2"><a href="'.$base_url.'/recipe_recommendation/'.$node->nid.'">Rezept empfehlen</a></td></tr>';
+    $output .= '<tr><td colspan="2"><a href="'.$base_url.'/rezept_pdf/'.$node->nid.'">PDF-Version</a></td></tr>';
+
   }
 
   $output .= '</table>';
