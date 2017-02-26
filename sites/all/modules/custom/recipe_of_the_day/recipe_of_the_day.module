@@ -38,13 +38,14 @@ function recipe_of_the_day_cron() {
             ->execute();
     } else {
         foreach ($result as $item2) {
+
             if(!isToday($item2->date)) {
                 $heute = date("Y-m-d");
                 $recipe_id = 0;
                 $sql = "SELECT * FROM {node} WHERE type ='recipe' ORDER BY RAND() LIMIT 1";
-                $result = db_query($sql);
+                $result2 = db_query($sql);
 
-                foreach ($result as $item) {
+                foreach ($result2 as $item) {
                     $recipe_id = $item->nid;
                 }
                 drupal_set_message("Letzter Eintrag ist nicht von heute, neue Rezept_ID: ".$recipe_id);
@@ -81,7 +82,7 @@ function recipe_of_the_day_block_view($delta = '') {
             $path2 = "http://www.gemaa-tempelsee.info/wp-content/uploads/2017/01/kein-bild-vorhanden.gif";
             $name = "";
 
-            $sql = "SELECT * FROM {recipe_of_the_day} ORDER BY recipe_of_the_day_id DESC";
+            $sql = "SELECT * FROM {recipe_of_the_day} ORDER BY recipe_of_the_day_id ASC";
             $result = db_query($sql);
             foreach ($result as $item) {
                 $nid = $item->recipe_id;
