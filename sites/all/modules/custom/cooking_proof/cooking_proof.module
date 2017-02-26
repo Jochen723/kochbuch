@@ -29,7 +29,120 @@ function cooking_proof_menu() {
         'type' => MENU_CALLBACK,
     );
 
+    $items['recipe_plan_recipe/%'] = array(
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'access callback' => 'user_is_logged_in',
+        'page arguments' => array('cooking_proof_plan_recipe_form'),
+    );
+
     return $items;
+}
+
+function cooking_proof_plan_recipe_form() {
+    $dateformat = 'Y-m-d H:i';
+    $label = t('Geplanter Kochzeitpunkt:');
+    $timestamp = time();
+    $dbv = $timestamp;
+    if (empty($dbv)) {
+        $d = new DateTime('@'.$dbv);
+        $value = $d->format($dateformat);
+    } else {
+        $d = new DateTime();
+        $value = $d->format($dateformat);
+    }
+
+    $form['test2']['start'] = array(
+        '#type' => 'date_popup',
+        '#date_timezone' => date_default_timezone(),
+        '#date_format' => $dateformat,
+        '#date_year_range' => '-3:+3',
+        '#title' => $label,
+        '#default_value' => $value,
+    );
+
+    $form['submit2'] = array(
+        '#type' => 'submit',
+        '#value' => 'Abbrechen',
+        '#submit' => array('cooking_proof_back_to_watchlist')
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Speichern',
+        '#submit' => array('cooking_proof_plan_recipe_from_watchlist')
+    );
+
+    return $form;
+
+}
+
+function cooking_proof_back_to_watchlist() {
+    drupal_goto("merkliste");
+}
+
+
+function cooking_proof_plan_recipe_from_watchlist(&$form, &$form_state) {
+
+    $date = $form_state['values']['start'];
+
+    if(strlen($date)>0) {
+        drupal_set_message($date);
+
+        $recipe_id = arg(1);
+
+        $node2 = node_load($recipe_id);
+
+        global $user;
+
+        db_insert('recipe_cooked')
+            ->fields(array(
+                'recipe_id' => $recipe_id,
+                'date' => $date,
+                'uid' => $user->uid,
+            ))
+            ->execute();
+
+
+        $node = new stdClass();
+        $node->type = 'rezepthistorie';
+        node_object_prepare($node);
+
+        $node->language = LANGUAGE_NONE;
+
+        $node->title = $node2->title;
+
+        $date = new DateTime($date);
+
+        $date->sub(new DateInterval('PT1H'));
+        $deadline2 = $date->format('Y-m-d H:i:s');
+
+        $deadline2 = str_replace(" ", "T", $deadline2);
+
+        $node->field_datum[$node->language][0]['value'] = $deadline2;
+        $node->field_datum[$node->language][0]['timezone'] = "Europe/Berlin";
+        $node->field_datum[$node->language][0]['timezone_db'] = "Europe/Berlin";
+
+        $node->field_namenreferenz[$node->language][0]['value'] = $node2->title;
+        $node->field_nutzerreferenz[$node->language][0]['value'] = $user->uid;
+
+
+        $node->field_referenz[$node->language][0]['value'] = $node2->nid;
+
+        node_save($node);
+
+        //Aus Merkliste löschen
+        $sql = "DELETE FROM {recipe_watchlist} WHERE uid = ".$user->uid." AND recipe_id = ".$recipe_id;
+        db_query($sql);
+        drupal_set_message("Rezept wurde geplant und aus der Merkliste entfernt");
+        drupal_goto("vergangene_Gerichte");
+
+
+
+    } else {
+        drupal_set_message("Bitte gültiges Datum angeben", "error");
+    }
+
 }
 
 function cooking_proof_form_alter(&$form, &$form_state, $form_id) {
@@ -89,7 +202,6 @@ function cooking_proof_add_to_history() {
 
     $node->field_referenz[$node->language][0]['value'] = $node2->nid;
 
-// Save node
     node_save($node);
 
 
