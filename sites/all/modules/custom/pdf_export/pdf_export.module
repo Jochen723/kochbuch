@@ -67,6 +67,10 @@ function pdf_export_create_pdf() {
         $pair['einheit'] = $item3->unit_key;
         $pair['zutat'] = $item3->name;
 
+        if($pair['anzahl'] == 0) {
+            $pair['anzahl'] = "";
+        }
+
         array_push($ingredient_array, $pair);
     }
 
