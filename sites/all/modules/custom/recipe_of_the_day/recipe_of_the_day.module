@@ -106,7 +106,7 @@ function recipe_of_the_day_block_view($delta = '') {
             }
 
             $block['subject'] = t('Rezept des Tages');
-            $block['content'] = ' <a href="'.$base_url.'/node/'.$nid.'"</a> <img class = "img "src="'.$path2.'" border="4" alt="Rose 1"><h3>'.$name.'</h3><br><br>';
+            $block['content'] = ' <a href="'.$base_url.'/node/'.$nid.'"><img class = "img "src="'.$path2.'" border="4" alt="Rose 1"></a><h3>'.$name.'</h3><br><br>';
             break;
     }
     return $block;
