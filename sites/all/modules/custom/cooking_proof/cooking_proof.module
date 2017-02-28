@@ -36,6 +36,20 @@ function cooking_proof_menu() {
         'page arguments' => array('cooking_proof_plan_recipe_form'),
     );
 
+    $items['recipe_plan_to_cooked/%'] = array(
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'access callback' => 'user_is_logged_in',
+        'page arguments' => array('cooking_proof_from_plan_to_cook'),
+    );
+
+    $items['recipe_plan_to_watchlist/%'] = array(
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'access callback' => 'user_is_logged_in',
+        'page arguments' => array('cooking_proof_from_plan_to_watchlist'),
+    );
+
     return $items;
 }
 
@@ -126,6 +140,8 @@ function cooking_proof_plan_recipe_from_watchlist(&$form, &$form_state) {
         $node->field_namenreferenz[$node->language][0]['value'] = $node2->title;
         $node->field_nutzerreferenz[$node->language][0]['value'] = $user->uid;
 
+        $node->field_koch_check[$node->language][0]['value'] = 0;
+
 
         $node->field_referenz[$node->language][0]['value'] = $node2->nid;
 
@@ -199,6 +215,8 @@ function cooking_proof_add_to_history() {
     $node->field_namenreferenz[$node->language][0]['value'] = $node2->title;
     $node->field_nutzerreferenz[$node->language][0]['value'] = $user->uid;
 
+    $node->field_koch_check[$node->language][0]['value'] = 1;
+
 
     $node->field_referenz[$node->language][0]['value'] = $node2->nid;
 
@@ -220,7 +238,7 @@ function cooking_proof_get_cooking_history() {
     $heute = date("Y-m-d 00:00:00");
     $heute = date('Y-m-d H:i:s', strtotime($heute . ' +1 day'));
 
-    $sql = "SELECT * FROM {node} as node INNER JOIN {field_data_field_datum} as date on node.nid = date.entity_id WHERE node.type = 'rezepthistorie' AND node.uid = ".$user->uid." AND field_datum_value <= '".$heute."' ORDER BY field_datum_value";
+    $sql = "SELECT * FROM {node} as node INNER JOIN {field_data_field_datum} as date on node.nid = date.entity_id INNER JOIN {field_data_field_koch_check} as koch On koch.entity_id =node.nid WHERE node.type = 'rezepthistorie' AND node.uid = ".$user->uid." AND field_datum_value <= '".$heute."' AND koch.field_koch_check_value = 1 ORDER BY field_datum_value";
 
     $tempString = '
     <style>
@@ -281,7 +299,10 @@ function cooking_proof_get_cooking_history() {
     $tempString .= "<h1>geplante Gerichte</h1>";
     $tempString .= "<table><th width=\"22%\">Nr.</th><th>Rezeptname</th> <th> Datum</th><th>Aktionen</th>";
 
-    $sql = "SELECT * FROM {node} as node INNER JOIN {field_data_field_datum} as date on node.nid = date.entity_id WHERE node.type = 'rezepthistorie' AND node.uid = ".$user->uid." AND field_datum_value > '".$heute."' ORDER BY field_datum_value";
+    $heute = date("Y-m-d 00:00:00");
+    $heute = date('Y-m-d H:i:s', strtotime($heute . ' -1 day'));
+
+    $sql = "SELECT * FROM {node} as node INNER JOIN {field_data_field_datum} as date on node.nid = date.entity_id INNER JOIN {field_data_field_koch_check} as koch On koch.entity_id =node.nid WHERE node.type = 'rezepthistorie' AND node.uid = ".$user->uid." AND koch.field_koch_check_value = 0 ORDER BY field_datum_value";
     $result = db_query($sql);
 
     foreach ($result as $item4) {
@@ -307,7 +328,24 @@ function cooking_proof_get_cooking_history() {
             }
         }
 
-        $tempString .= "<tr><td><img class = \"img \"src=\"".$path2."\" border=\"4\" alt=\"Rose 1\"></td><td><a href='".$base_url."/node/".$recipe_id."'>".$item4->title."</a></td><td>".$mysqldate."</td><td><ul><li><a href='".$base_url."/node/".$item4->nid."/edit'>bearbeiten</a></li><li><a href='".$base_url."/entferne_rezepthistorie/".$item4->nid."'>entfernen</a></li></ul></td></tr>";
+        $tempString .= "<tr><td><img class = \"img \"src=\"".$path2."\" border=\"4\" alt=\"Rose 1\"></td><td><a href='".$base_url."/node/".$recipe_id."'>".$item4->title."</a></td><td>".$mysqldate."</td><td><ul><li><a href='".$base_url."/node/".$item4->nid."/edit'>bearbeiten</a></li><li><a href='".$base_url."/entferne_rezepthistorie/".$item4->nid."'>entfernen</a></li>";
+
+
+        $phpdate = strtotime( $item4->field_datum_value);
+
+        $heute = date("Y-m-d");
+
+
+        $mysqldate = date( 'Y-m-d', $phpdate );
+
+        $dateTimestamp1 = strtotime($mysqldate);
+        $dateTimestamp2 = strtotime($heute);
+
+        if($dateTimestamp1 <= $dateTimestamp2) {
+            $tempString .= "<li><a href='".$base_url."/recipe_plan_to_cooked/".$item4->nid."/edit'>gekocht</a></li><li><a href='".$base_url."/recipe_plan_to_watchlist/".$item4->nid."/edit'>nicht gekocht</a></li>";
+        } 
+
+        $tempString .= "</ul></td></tr>";
     }
 
 
@@ -330,6 +368,36 @@ function cooking_proof_get_recipe_name_from_id($recipe_id) {
     }
 
     return $recipe;
+}
+
+function cooking_proof_from_plan_to_cook() {
+    $recipe_id = arg(1);
+
+    $sql = "UPDATE {field_data_field_koch_check} SET field_koch_check_value = 1 WHERE entity_id = ".$recipe_id;
+    db_query($sql);
+
+    drupal_set_message("Das Rezept wurde der Rezepthistorie hinzugefügt");
+    drupal_goto("/vergangene_gerichte");
+}
+
+function cooking_proof_from_plan_to_watchlist() {
+    $recipe_id = arg(1);
+    global $user;
+
+    $recipe_reference = 0;
+
+    $sql = "SELECT * FROM {node} as node INNER JOIN {field_data_field_referenz} as ref on node.nid = ref.entity_id WHERE node.nid = ".$recipe_id;
+    $result = db_query($sql);
+    foreach ($result as $item) {
+        $recipe_reference = $item->field_referenz_value;
+        node_delete($item->nid);
+    }
+
+    $sql = "INSERT INTO {recipe_watchlist} (uid, recipe_id) VALUES (".$user->uid.",".$recipe_reference.")";
+    db_query($sql);
+
+    drupal_set_message("Das Rezept wurde der Rezepthistorie hinzugefügt");
+    drupal_goto("/vergangene_gerichte");
 }
 
 

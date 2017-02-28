@@ -2096,7 +2096,7 @@ function recipe_get_units($limit_to_preferred = 0) {
     'liter' =>      array('name' => t('Liter'),      'plural' => t('Liter'),      'abbreviation' => t('l'),   'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
     'deciliter' =>  array('name' => t('Deziliter'),  'plural' => t('Deziliter'),  'abbreviation' => t('dl'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
     'milligram' =>  array('name' => t('Milligramm'),  'plural' => t('Milligramm'),  'abbreviation' => t('mg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
-    'gram' =>       array('name' => t('Gramm'),       'plural' => t('Gramm'),       'abbreviation' => t('g'),   'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
+    'Gramm' =>       array('name' => t('Gramm'),       'plural' => t('Gramm'),       'abbreviation' => t('g'),   'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
     'centigram' =>  array('name' => t('Zentigramm'),  'plural' => t('Zentigramm'),  'abbreviation' => t('cg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
     'kilogram' =>   array('name' => t('Kilogramm'),   'plural' => t('Kilogramm'),   'abbreviation' => t('kg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
   );
@@ -2111,7 +2111,7 @@ function recipe_get_units($limit_to_preferred = 0) {
     'dose' =>      array('name' => t('Dose'),     'plural' => t('Dosen'),     'abbreviation' => t('Dose(n)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array('jar')),
     'tropfen' =>     array('name' => t('Tropfen'),    'plural' => t('Tropfen'),    'abbreviation' => t('Tropfen'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
     'karton' =>   array('name' => t('Karton'),  'plural' => t('Kartons'),  'abbreviation' => t('Karton(s)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'stueck' =>   array('name' => t('Stück'),  'plural' => t('Stücke'),  'abbreviation' => t('Stück'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'Stück' =>   array('name' => t('Stück'),  'plural' => t('Stücke'),  'abbreviation' => t('Stück'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
 
     'einheit' =>     array('name' => t('Einheit'),    'plural' => t('Einheiten'),    'abbreviation' => '', 'system' => 'common', 'type' => t('indefinite'), 'aliases' => array('each', 'ea', 'whole')),
     'unbekannt' =>  array('name' => t('Unbekannt'), 'plural' => t('Unbekannt'),  'abbreviation' => '', 'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array())

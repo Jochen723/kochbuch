@@ -63,14 +63,13 @@ function recipe_of_the_day_cron() {
     }
 }
 
-function isToday($time) // midnight second
+function isToday($time)
 {
     return (strtotime($time) === strtotime('today'));
 }
 
 
 function recipe_of_the_day_block_view($delta = '') {
-    // This example is adapted from node.module.
     $block = array();
 
     switch ($delta) {
