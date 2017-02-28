@@ -6,6 +6,16 @@
  * Time: 18:06
  */
 
+function cooking_proof_block_info() {
+    $blocks = array();
+    $blocks['my_block'] = array(
+        'info' => t('Cooking Proof'),
+    );
+
+    return $blocks;
+}
+
+
 function cooking_proof_menu() {
 
     $items['vergangene_Gerichte'] = array(
@@ -343,7 +353,7 @@ function cooking_proof_get_cooking_history() {
 
         if($dateTimestamp1 <= $dateTimestamp2) {
             $tempString .= "<li><a href='".$base_url."/recipe_plan_to_cooked/".$item4->nid."/edit'>gekocht</a></li><li><a href='".$base_url."/recipe_plan_to_watchlist/".$item4->nid."/edit'>nicht gekocht</a></li>";
-        } 
+        }
 
         $tempString .= "</ul></td></tr>";
     }
@@ -398,6 +408,44 @@ function cooking_proof_from_plan_to_watchlist() {
 
     drupal_set_message("Das Rezept wurde der Rezepthistorie hinzugefügt");
     drupal_goto("/vergangene_gerichte");
+}
+
+function cooking_proof_block_view($delta = '') {
+    $block = array();
+
+    switch ($delta) {
+        case 'my_block':
+
+            $content = "Keine Plan-Aktionen vorhanden";
+            global $base_url;
+            global $user;
+            $sql = "SELECT * FROM {node} as node INNER JOIN {field_data_field_datum} as date on node.nid = date.entity_id INNER JOIN {field_data_field_koch_check} as koch On koch.entity_id =node.nid WHERE node.type = 'rezepthistorie' AND node.uid = ".$user->uid." AND koch.field_koch_check_value = 0 ORDER BY field_datum_value";
+            $result = db_query($sql);
+
+            foreach ($result as $item) {
+                $phpdate = strtotime( $item->field_datum_value);
+
+                $heute = date("Y-m-d");
+
+
+                $mysqldate = date( 'Y-m-d', $phpdate );
+
+                $dateTimestamp1 = strtotime($mysqldate);
+                $dateTimestamp2 = strtotime($heute);
+
+                if($dateTimestamp1 <= $dateTimestamp2) {
+                    $content = "Es sind Plan-Aktionen vorhanden. <a href='".$base_url."/vergangene_gerichte' >Hier zur Kochübersicht</a>";
+                }
+            }
+
+
+
+
+            $block['subject'] = t('Kochplanung');
+            $block['content'] = $content;
+            break;
+    }
+    return $block;
 }
 
 
