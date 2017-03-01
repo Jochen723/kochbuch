@@ -92,7 +92,7 @@ function recipe_overview_create_content($recipes) {
  <tr><td>
 
  <div class="city">
- <a href="'.$base_url.'/node/'.$recipes[$i].'"</a> <img class = "img "src="'.$path2.'" border="4" alt="Rose 1"><h3>'.$name.'</h3>
+ <a href="'.$base_url.'/node/'.$recipes[$i].'"><img class = "img "src="'.$path2.'" border="4" alt="Rose 1"><h3>'.$name.'</h3></a><br><br><br>
  </div>
 
  ';
