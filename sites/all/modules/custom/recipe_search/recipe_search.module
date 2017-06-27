@@ -356,17 +356,7 @@ function recipe_search_show_search_for_ingredient() {
 
 
 function recipe_search_search_form() {
-
-
-    $content = '<a href="http://www.vhkhvn.org/austin" target="_blank">Austin< /a>';
-    $form['form_item'] = array(
-        '#type' => 'markup',
-        '#title' => t('My Form Item'),
-        '#prefix' => $content,
-    );
-
-
-
+    
     $form['bodyTextField'] = array(
         '#type' => 'textfield',
         '#require' => TRUE,
