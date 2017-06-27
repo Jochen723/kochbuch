@@ -1025,7 +1025,7 @@ function theme_recipe_summary($variables) {
 //<a href="myfile.htm"><img src="rainbow.gif"></a>
 
     //$output .= '<a href="'.$path2.'"><img class = "img "src="'.$path2.'" border="4" alt="Rose 1"></a>';
-    $output .= '<a href="'.$path2.'"><img src="'.$path2.'"></a>';
+    $output .= '<a href="'.$path2.'"><img style="max-width:245px;" src="'.$path2.'"></a>';
     $output .= '<h2 class="title">' . t('Zusammenfassung') . '</h2>';
   }
 
@@ -1116,10 +1116,16 @@ $overall_counter = 0;
 
 global $user;
 
+$quantity = 0;
+$sql = "SELECT * FROM {recipe} WHERE nid = ".$node->nid;
+    $result = db_query($sql);
+    foreach ($result as $item4) {
+        $quantity = $item4->yield;
+    }
+
 $sql = "SELECT * FROM {field_data_field_referenz} as ref INNER JOIN {node} as node ON ref.field_referenz_value = node.nid WHERE node.nid = ".$node->nid;
 $result = db_query($sql);
 foreach ($result as $value) {
-  # code...
 
   if($value->uid == $user->uid) {
     $personal_counter++;
@@ -1138,6 +1144,10 @@ if($user->uid) {
   $output .= '<tr><td colspan="2"><a href="'.$base_url.'/add_to_category/'.$node->nid.'">Rezept in Kategorie speichern</a></td></tr>';
   $output .= '<tr><td colspan="2"><a href="'.$base_url.'/recipe_recommendation/'.$node->nid.'">Rezept empfehlen</a></td></tr>';
   $output .= '<tr><td colspan="2"><a href="'.$base_url.'/rezept_pdf/'.$node->nid.'">PDF-Version</a></td></tr>';
+
+  if($user->uid == 1 || $user->uid == 3) {
+    $output .= '<tr><td colspan="2"><a href="'.$base_url.'/add_to_wunderlist/'.$node->nid.'/'.$quantity.'">Zutaten zur Wunderlist hinzufügen</a></td></tr>';
+  }
 }
 
 
@@ -2087,39 +2097,45 @@ function recipe_duration_iso8601($data = '') {
 function recipe_get_units($limit_to_preferred = 0) {
 
   $us_units = array(
-    'becher' =>             array('name' => t('Becher'),         'plural' => t('Becher'),         'abbreviation' => t('Becher'),     'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
-    'beutel' =>             array('name' => t('Beutel'),         'plural' => t('Beutel'),         'abbreviation' => t('Beutel'),    'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
-    'blatt' =>              array('name' => t('Blatt'),          'plural' => t('Blätter'),       'abbreviation' => t('Blatt'),     'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
-    'bund' =>       array('name' => t('Bund'),      'plural' => t('Bund'),      'abbreviation' => t('Bund'),   'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
-    'pfund' =>           array('name' => t('Pfund'),       'plural' => t('Pfund'),       'abbreviation' => t('Pfund'),    'system' => 'us customary', 'type' => t('weight'), 'aliases' => array()),
-    'zehen' =>           array('name' => t('Zehe'),       'plural' => t('Zehen'),       'abbreviation' => t('Zehe(n)'),    'system' => 'us customary', 'type' => t('weight'), 'aliases' => array()),
+    'Becher' =>             array('name' => t('Becher'),         'plural' => t('Becher'),         'abbreviation' => t('Becher'),     'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
+    'Beutel' =>             array('name' => t('Beutel'),         'plural' => t('Beutel'),         'abbreviation' => t('Beutel'),    'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
+    'Blatt' =>              array('name' => t('Blatt'),          'plural' => t('Blätter'),       'abbreviation' => t('Blatt'),     'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
+    'Bund' =>       array('name' => t('Bund'),      'plural' => t('Bund'),      'abbreviation' => t('Bund'),   'system' => 'us customary', 'type' => t('volume'), 'aliases' => array()),
+    'Pfund' =>           array('name' => t('Pfund'),       'plural' => t('Pfund'),       'abbreviation' => t('Pfund'),    'system' => 'us customary', 'type' => t('weight'), 'aliases' => array()),
+    'Zehen' =>           array('name' => t('Zehe'),       'plural' => t('Zehen'),       'abbreviation' => t('Zehe(n)'),    'system' => 'us customary', 'type' => t('weight'), 'aliases' => array()),
 
   );
 
   $si_units = array(
-    'milliliter' => array('name' => t('Milliliter'), 'plural' => t('Milliliter'), 'abbreviation' => t('ml'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
-    'centiliter' => array('name' => t('Zentiliter'), 'plural' => t('Centiliter'), 'abbreviation' => t('cl'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
-    'liter' =>      array('name' => t('Liter'),      'plural' => t('Liter'),      'abbreviation' => t('l'),   'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
-    'deciliter' =>  array('name' => t('Deziliter'),  'plural' => t('Deziliter'),  'abbreviation' => t('dl'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
-    'milligram' =>  array('name' => t('Milligramm'),  'plural' => t('Milligramm'),  'abbreviation' => t('mg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
+    'Milliliter' => array('name' => t('Milliliter'), 'plural' => t('Milliliter'), 'abbreviation' => t('ml'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
+    'Zentiliter' => array('name' => t('Zentiliter'), 'plural' => t('Centiliter'), 'abbreviation' => t('cl'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
+    'Liter' =>      array('name' => t('Liter'),      'plural' => t('Liter'),      'abbreviation' => t('l'),   'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
+    'Deciliter' =>  array('name' => t('Deziliter'),  'plural' => t('Deziliter'),  'abbreviation' => t('dl'),  'system' => 'si', 'type' => t('volume'), 'aliases' =>  array()),
+    'Milligramm' =>  array('name' => t('Milligramm'),  'plural' => t('Milligramm'),  'abbreviation' => t('mg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
     'Gramm' =>       array('name' => t('Gramm'),       'plural' => t('Gramm'),       'abbreviation' => t('g'),   'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
-    'centigram' =>  array('name' => t('Zentigramm'),  'plural' => t('Zentigramm'),  'abbreviation' => t('cg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
-    'kilogram' =>   array('name' => t('Kilogramm'),   'plural' => t('Kilogramm'),   'abbreviation' => t('kg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
+    'Zentigramm' =>  array('name' => t('Zentigramm'),  'plural' => t('Zentigramm'),  'abbreviation' => t('cg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
+    'Kilogramm' =>   array('name' => t('Kilogramm'),   'plural' => t('Kilogramm'),   'abbreviation' => t('kg'),  'system' => 'si', 'type' => t('weight'), 'aliases' =>  array()),
   );
 
   $common_units = array(
-    'essloeffel' => array('name' => t('Esslöffel'), 'plural' => t('Esslöffel'), 'abbreviation' => t('EL'),   'system' => 'common', 'type' => t('volume'), 'aliases' => array('tbsp','tb')),
-    'teeloeffel' =>   array('name' => t('Teelöffel'),   'plural' => t('Teelöffel'),   'abbreviation' => t('TL'),   'system' => 'common', 'type' => t('volume'), 'aliases' => array('tsp')),
+    'Esslöffel' => array('name' => t('Esslöffel'), 'plural' => t('Esslöffel'), 'abbreviation' => t('EL'),   'system' => 'common', 'type' => t('volume'), 'aliases' => array('tbsp','tb')),
+    'Teelöffel' =>   array('name' => t('Teelöffel'),   'plural' => t('Teelöffel'),   'abbreviation' => t('TL'),   'system' => 'common', 'type' => t('volume'), 'aliases' => array('tsp')),
 
-    'scheibe' =>    array('name' => t('Scheibe'),   'plural' => t('Scheiben'),   'abbreviation' => t('Scheibe(n)'), 'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'prise' =>    array('name' => t('Prise'),   'plural' => t('Prisen'),  'abbreviation' => t('Prise(n)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'paket' =>  array('name' => t('Paket'), 'plural' => t('Pakete'), 'abbreviation' => t('Paket(e)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array('pack')),
-    'dose' =>      array('name' => t('Dose'),     'plural' => t('Dosen'),     'abbreviation' => t('Dose(n)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array('jar')),
-    'tropfen' =>     array('name' => t('Tropfen'),    'plural' => t('Tropfen'),    'abbreviation' => t('Tropfen'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
-    'karton' =>   array('name' => t('Karton'),  'plural' => t('Kartons'),  'abbreviation' => t('Karton(s)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'Scheibe' =>    array('name' => t('Scheibe'),   'plural' => t('Scheiben'),   'abbreviation' => t('Scheibe(n)'), 'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'Schuss' =>    array('name' => t('Schuss'),   'plural' => t('Schuss'),   'abbreviation' => t('Schuss'), 'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+
+    'Prise' =>    array('name' => t('Prise'),   'plural' => t('Prisen'),  'abbreviation' => t('Prise(n)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'Paket' =>  array('name' => t('Paket'), 'plural' => t('Pakete'), 'abbreviation' => t('Paket(e)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array('pack')),
+    'Dose' =>      array('name' => t('Dose'),     'plural' => t('Dosen'),     'abbreviation' => t('Dose(n)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array('jar')),
+    'Tropfen' =>     array('name' => t('Tropfen'),    'plural' => t('Tropfen'),    'abbreviation' => t('Tropfen'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'Karton' =>   array('name' => t('Karton'),  'plural' => t('Kartons'),  'abbreviation' => t('Karton(s)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'Packung' =>   array('name' => t('Packung'),  'plural' => t('Packungen'),  'abbreviation' => t('Packung(en)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'Tafel' =>   array('name' => t('Tafel'),  'plural' => t('Tafeln'),  'abbreviation' => t('Tafel(n)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'Tasse' =>   array('name' => t('Tasse'),  'plural' => t('Tassen'),  'abbreviation' => t('Tasse(n)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
+    'Stange' =>   array('name' => t('Stange'),  'plural' => t('Stangen'),  'abbreviation' => t('Stange(n)'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
     'Stück' =>   array('name' => t('Stück'),  'plural' => t('Stücke'),  'abbreviation' => t('Stück'),  'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array()),
 
-    'einheit' =>     array('name' => t('Einheit'),    'plural' => t('Einheiten'),    'abbreviation' => '', 'system' => 'common', 'type' => t('indefinite'), 'aliases' => array('each', 'ea', 'whole')),
+    'Einheit' =>     array('name' => t('Einheit'),    'plural' => t('Einheiten'),    'abbreviation' => '', 'system' => 'common', 'type' => t('indefinite'), 'aliases' => array('each', 'ea', 'whole')),
     'unbekannt' =>  array('name' => t('Unbekannt'), 'plural' => t('Unbekannt'),  'abbreviation' => '', 'system' => 'common', 'type' => t('indefinite'), 'aliases' =>  array())
   );
 

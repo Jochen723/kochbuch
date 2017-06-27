@@ -9,7 +9,7 @@
 function recipe_of_the_day_block_info() {
     $blocks = array();
     $blocks['my_block'] = array(
-        'info' => t('My Custom Block'),
+        'info' => t('Recipe of the day'),
     );
 
     return $blocks;

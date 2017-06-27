@@ -81,7 +81,7 @@ function watchlist_show_recipes() {
 
         $table_string .= '
         <tr>
-            <td align="right"><img class = "img "src="'.$path2.'" border="4" alt="Rose 1"></td>
+            <td align="center"><img style="max-width:245px;" class = "img "src="'.$path2.'" border="4" alt="Rose 1"></td>
             <td><a href="'.$base_url.'/node/'.$item->recipe_id.'">'.$item->title.'</td>
             <td><ul><li><a href="'.$base_url.'/entferne_rezept_von_merkliste/'.$item->recipe_id.'">von Merkliste löschen</li><li><a href="'.$base_url.'/recipe_plan_recipe/'.$item->recipe_id.'">Planen</a></li></ul></td>
         </tr>';

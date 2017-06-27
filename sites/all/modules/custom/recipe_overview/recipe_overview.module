@@ -11,6 +11,7 @@ function recipe_overview_menu() {
     $items['rezeptuebersicht'] = array(
         'title' => 'Rezeptübersicht',
         'page callback' => 'recipe_overview_get_recipes',
+        'access callback' => 'user_is_logged_in',
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );

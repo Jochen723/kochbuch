@@ -21,6 +21,20 @@ function recipe_search_menu() {
         'page arguments' => array('recipe_search_term_search_form'),
     );
 
+    $items['ingredient_search'] = array(
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'access callback' => 'user_is_logged_in',
+        'page arguments' => array('recipe_search_ingredient_search_form'),
+    );
+
+    $items['show_ingredient_search'] = array(
+        'title' => 'Ergebnisse der Suche nach Zutaten',
+        'page callback' => 'recipe_search_show_search_for_ingredient',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
     $items['show_term_search/%'] = array(
         'title' => 'Ergebnisse der Suche nach einer Eigenschaft',
         'page callback' => 'recipe_search_search_for_term',
@@ -30,8 +44,15 @@ function recipe_search_menu() {
 
 
     $items['show_recipe_search/%'] = array(
-        'title' => 'Ergebnisse der Sucht nach Rezepttitel',
+        'title' => 'Ergebnisse der Suche nach Rezepttitel',
         'page callback' => 'recipe_search_search_for_recipe_title',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['add_search_item/%'] = array(
+        'title' => 'Ergebnisse der Suche nach Rezepttitel',
+        'page callback' => 'recipe_search_add_search_item',
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
@@ -116,6 +137,49 @@ function recipe_search_search_for_term() {
     return $table_string;
 }
 
+function recipe_search_ingredient_search_form() {
+    global $user;
+
+    $newString = "gesuchte Zutaten: <br>";
+    $sql = "SELECT * FROM {recipe_search_items} WHERE uid = ".$user->uid;
+    $result = db_query($sql);
+
+    foreach ($result as $it) {
+
+        $sql = "SELECT * FROM {recipe_ingredient} WHERE id = ".$it->ingredient_id;
+        $res = db_query($sql);
+        foreach ($res as $resu) {
+            $newString .= $resu->name."<br>";
+        }
+    }
+
+    $newString .="<br>";
+
+    $form['form_item2'] = array(
+        '#type' => 'markup',
+        '#title' => t('My Form Item'),
+        '#prefix' => $newString,
+    );
+
+
+    $content = recipe_search_search_for_ingredients();
+
+    $form['form_item'] = array(
+        '#type' => 'markup',
+        '#title' => t('My Form Item'),
+        '#prefix' => $content,
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Suche',
+        '#submit' => array('recipe_search_search_for_ingredient')
+    );
+
+
+    return $form;
+}
+
 
 
 function recipe_search_term_search_form() {
@@ -131,7 +195,178 @@ function recipe_search_term_search_form() {
     return $form;
 }
 
+function recipe_search_search_for_ingredient() {
+    drupal_goto("/show_ingredient_search");
+}
+
+
+function recipe_search_show_search_for_ingredient() {
+
+
+    global $base_url;
+    global $user;
+
+    $ingredient = array();
+
+
+    $sql = "SELECT * FROM {recipe_search_items} WHERE uid = ".$user->uid;
+    $result = db_query($sql);
+
+    foreach ($result as $it) {
+
+        $sql = "SELECT * FROM {recipe_ingredient} WHERE id = ".$it->ingredient_id;
+        $res = db_query($sql);
+        foreach ($res as $resu) {
+            array_push($ingredient, "'".$resu->name."'");
+        }
+
+    }
+
+    if($result->rowCount() == 0) {
+        array_push($ingredient, "''");
+    }
+
+
+    $array1 = array();
+    $res = array();
+    $resOverall = array();
+
+    $ingredient2 = "";
+    for($i=0;$i<sizeof($ingredient);$i++) {
+        $ingredient2 .= $ingredient[$i];
+        if(sizeof($ingredient)-$i >1) {
+            $ingredient2 .= ",";
+        }
+    }
+
+
+    $sql = "DELETE FROM {recipe_search_items} WHERE uid = ".$user->uid;
+    db_query($sql);
+
+
+
+    $sql = "SELECT * FROM {recipe_node_ingredient} AS ing INNER JOIN {recipe_ingredient} AS ingredient ON ing.ingredient_id = ingredient.id WHERE name IN ($ingredient2)";
+    $result = db_query($sql);
+    foreach ($result as $item) {
+        array_push($array1, $item->nid);
+    }
+
+    $array1 = array_unique($array1);
+
+    foreach ($array1 as $item2) {
+        $counter = 0;
+        for ($i=0;$i<sizeof($ingredient);$i++) {
+            $sql = "SELECT * FROM {recipe_node_ingredient} AS ing INNER JOIN {recipe_ingredient} AS ingredient ON ing.ingredient_id = ingredient.id WHERE ing.nid = ".$item2." AND name = ".$ingredient[$i];
+            $result = db_query($sql);
+            if($result->rowCount() >0) {
+                $counter++;
+            }
+        }
+
+        $percent = $counter / sizeof($ingredient) * 100;
+        $res["percent"] = $percent;
+        $res["recipe"] = $item2;
+        array_push($resOverall, $res);
+    }
+
+    $table_string = '<style>
+.city {
+ margin: 5px;
+ max-width: 300px;
+ width: 180px;
+ height: 180px;
+ padding: 3px;
+ font-size: 0.7em;
+}
+
+.img {
+    width:  200px;
+    height: 150px;
+}
+</style>';
+
+    $blabla = "";
+    $teeest = $ingredient;
+    foreach ($teeest as $itemxx) {
+        $blabla .= $itemxx . " ";
+    }
+
+    $blabla = str_replace("'","",$blabla);
+
+
+    $table_string = $blabla.'
+    <table>
+        <tr>
+            <th  width="25%">Bild</th>
+            <th>Name</th>
+            <th>Aktion</th>
+        </tr>';
+
+    foreach ($resOverall as $key => $row) {
+        $band[$key]    = $row['percent'];
+    }
+
+    if(sizeof($resOverall)>0) {
+        array_multisort($band, SORT_DESC, $resOverall);
+    }
+
+
+
+    foreach ($resOverall as $item3) {
+
+
+        $test = $item3["percent"];
+        $test2 = $item3["recipe"];
+
+        $n = node_load($test2);
+
+
+
+        $path2 = "http://www.gemaa-tempelsee.info/wp-content/uploads/2017/01/kein-bild-vorhanden.gif";
+
+        $sql = "SELECT * FROM {field_data_field_recipe_image} WHERE entity_id = ".$item3["recipe"];
+        $result = db_query($sql);
+        foreach ($result as $item3) {
+            $sql2 = "SELECT * FROM {file_managed} WHERE fid = ".$item3->field_recipe_image_fid;
+            $result2 = db_query($sql2);
+            foreach ($result2 as $item2) {
+                $path2 = $item2->uri;
+                $path2 = substr($path2, 8);
+                $path2 = $base_url."/sites/default/files/".$path2;
+            }
+        }
+
+        $table_string .= '
+        <tr>
+            <td align="right"><img class = "img "src="'.$path2.'" border="4" alt="Rose 1"></td>
+            <td><a href="'.$base_url.'/node/'.$test2.'">'.$n->title.'</td>
+            <td>'.$test.' Prozent Übereinstimmung</td>
+
+        </tr>';
+
+
+    }
+    $table_string .= '</table>';
+
+
+
+    return $table_string;
+}
+
+
+
 function recipe_search_search_form() {
+
+
+    $content = '<a href="http://www.vhkhvn.org/austin" target="_blank">Austin< /a>';
+    $form['form_item'] = array(
+        '#type' => 'markup',
+        '#title' => t('My Form Item'),
+        '#prefix' => $content,
+    );
+
+
+
     $form['bodyTextField'] = array(
         '#type' => 'textfield',
         '#require' => TRUE,
@@ -150,7 +385,9 @@ function recipe_search_search_form() {
 
 function recipe_search_redirect_to_recipe_title(&$form, &$form_state) {
     $search = $form_state['values']['bodyTextField'];
-    drupal_goto("show_recipe_search/".$search);
+    $url = "http://www.google.de";
+    drupal_add_js('window.open(' . $url . ')', 'inline');
+    //drupal_goto("show_recipe_search/".$search);
 }
 
 
@@ -232,4 +469,27 @@ function recipe_search_search_for_terms() {
 
     return $string;
 
+}
+
+function recipe_search_search_for_ingredients() {
+    global $base_url;
+    $sql = "SELECT * FROM {recipe_ingredient} ORDER BY name";
+    $result = db_query($sql);
+
+    $string = "<ul>";
+    foreach ($result as $item) {
+        $string .="<li><a href='".$base_url."/add_search_item/".$item->id."'>$item->name</a></li>";
+    }
+    $string .="</ul>";
+
+    return $string;
+}
+
+function recipe_search_add_search_item() {
+    global $user;
+
+    $sql = "INSERT INTO {recipe_search_items} (uid, ingredient_id) VALUES (".$user->uid.",".arg(1).")";
+    db_query($sql);
+
+    drupal_goto("ingredient_search");
 }
