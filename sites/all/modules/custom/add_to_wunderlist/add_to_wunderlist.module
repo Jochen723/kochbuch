@@ -1,0 +1,217 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jonaskortum
+ * Date: 08.03.17
+ * Time: 16:43
+ */
+
+function add_to_wunderlist_menu()
+{
+    $items['add_to_wunderlist/%/%'] = array(
+        'title' => 'Rezeptsuche',
+        'access callback' => true,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('add_to_wunderlist_add_form'),
+    );
+
+    return $items;
+}
+
+function add_to_wunderlist_add_form()
+{
+
+    $recipe_id = arg(1);
+    $quantity = arg(2);
+
+    $ingredient_array = array();
+
+    $number = 0;
+    $einheit = "";
+
+    $sql = "SELECT * FROM {recipe} WHERE nid = ".$recipe_id;
+    $result = db_query($sql);
+    foreach ($result as $item4) {
+        $number = $item4->yield;
+        $einheit = $item4->yield_unit;
+    }
+
+
+
+
+    $sql = "SELECT * FROM {recipe_node_ingredient} as node INNER JOIN {recipe_ingredient} as ing ON node.ingredient_id = ing.id WHERE nid = " . $recipe_id;
+    $result3 = db_query($sql);
+    foreach ($result3 as $item3) {
+        $pair = array();
+        $pair['anzahl'] = $item3->quantity;
+        $pair['einheit'] = $item3->unit_key;
+        $pair['zutat'] = $item3->name;
+
+        $string = "";
+
+        if ($pair['anzahl'] == 0) {
+
+            if (!strcmp($pair['einheit'], "0")) {
+                $string .= $pair['zutat'];
+            } else {
+                $string .= $pair['einheit'] . " " . $pair['zutat'];
+            }
+        } else {
+            $pair['anzahl'] = $pair['anzahl'] / $number * $quantity;
+            $pair['anzahl'] = round($pair['anzahl'], 2);
+
+            if (!strcmp($pair['einheit'], "0")) {
+                $string .= $pair['anzahl'] . " " . $pair['zutat'];
+            } else {
+                $string .= $pair['anzahl'] . " " . $pair['einheit'] . " " . $pair['zutat'];
+            }
+        }
+
+
+
+        $ingredient_array["$string"] = $string;
+
+    }
+
+    $form['quantity'] = array(
+        '#type' => 'textfield',
+        '#attributes' => array(
+            'data-type' => 'number',
+        ),
+        '#size' => 2,
+        '#maxlength' => 2,
+        '#default_value' => $quantity,
+        '#field_suffix' => $einheit
+    );
+
+    $form['change'] = array(
+        '#type' => 'submit',
+        '#value' => $einheit . ' ändern',
+        '#submit' => array('add_to_wunderlist_change_quantity')
+    );
+
+    $form['reset'] = array(
+        '#type' => 'submit',
+        '#value' => "Reset",
+        '#submit' => array('add_to_wunderlist_reset')
+    );
+
+
+    $form['ios'] = array(
+        '#title' => t(''),
+        '#type' => 'checkboxes',
+        '#description' => t(''),
+        '#options' => $ingredient_array,
+
+    );
+
+
+
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'zur Wunderlist hinzufügen',
+        '#submit' => array('add_to_wunderlist_form_submit')
+    );
+    return $form;
+
+}
+
+function add_to_wunderlist_reset() {
+
+    $recipe_id = arg(1);
+
+    $number = 0;
+    $einheit = "";
+
+    $sql = "SELECT * FROM {recipe} WHERE nid = ".$recipe_id;
+    $result = db_query($sql);
+    foreach ($result as $item4) {
+        $number = $item4->yield;
+    }
+
+    drupal_goto("add_to_wunderlist/".$recipe_id."/".$number);
+}
+
+function add_to_wunderlist_change_quantity($form, &$form_state) {
+    $recipe_id = arg(1);
+    $quantity = $form_state['values']['quantity'];
+    drupal_goto("add_to_wunderlist/".$recipe_id."/".$quantity);
+}
+
+function add_to_wunderlist_form_submit($form, &$form_state)
+{
+    $checked = array();
+    foreach ($form_state['values']['ios'] as $key => $val) {
+        array_push($checked, $val);
+
+    }
+
+
+    write_mail_to_wunderlist($checked);
+}
+
+function write_mail_to_wunderlist($array)
+{
+
+
+    foreach ($array as $ingredient) {
+        if (strcmp($ingredient, "0")) {
+
+            $from = "info@rezeptobot.de";
+            $to = "me@wunderlist.com";
+
+            $subject = $ingredient;
+            $body = "Test";
+
+            $fake_module = 'foo'; // or whatever you want
+            $fake_key = 'bar'; // or whatever you want
+
+            $message = array(
+                'id' => $fake_module . '_' . $fake_key,
+                'from' => $from,
+                'to' => $to,
+                'subject' => $subject,
+                'body' => $body,
+                'headers' => array(
+                    'Return-Path' => $from,
+                    'MIME-Version' => '1.0',
+                    'Content-Transfer-Encoding' => '8Bit',
+                    'Content-Type' => 'text/plain; charset=UTF-8;',
+                ),
+            );
+
+            $system = drupal_mail_system("newsletter", $fake_module, $fake_key);
+            if ($system->mail($message)) {
+                //drupal_set_message("Email wurde gesendet!");
+            } else {
+                drupal_set_message("Email wurde nicht gesendet!", "error");
+            }
+        }
+    }
+    drupal_set_message("Zutaten wurden der Wunderlist-Einkaufsliste hinzugefügt");
+
+    $recipe_id = arg(1);
+    drupal_goto("node/".$recipe_id);
+
+}
+
+function add_to_wunderlist_mail($key, &$message, $params)
+{
+    switch ($key) {
+        case 'newsletter':
+            $headers = array(
+                'MIME-Version' => '1.0',
+                'Content-Type' => 'text/html; charset=UTF-8;',
+                'Content-Transfer-Encoding' => '8Bit',
+                'X-Mailer' => 'Drupal'
+            );
+
+            foreach ($headers as $key => $value) {
+                $message['headers'][$key] = $value;
+            }
+            $message['subject'] = $params['subject'];
+            $message['body'] = array(0 => t($params['body']));
+            break;
+    }
+}
