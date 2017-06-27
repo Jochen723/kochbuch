@@ -1,0 +1,3 @@
+name = Fridgebot
+description = Dieses Modul erlaubt das Eintragen von vorhandenen Dingen im Kühlschrank
+core = 7.x
