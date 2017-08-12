@@ -1,3 +1,7 @@
 name = Zutaten zu Wunderlist hinzufügen
-description = Testbeschreibung
+description = Dieses Modul bietet dem Nutzer die Möglichkeit, Rezeptzutaten zur Wunderlist-App hinzuzufügen.
 core = 7.x
+
+dependencies[] = recipe
+
+scripts[] = js/add_to_wunderlist.js
